@@ -7,222 +7,106 @@
   <title>POINTO LLC — Pawnshop</title>
 
   <style>
-
     :root {
       --gold: #d9a51b;
       --gold-light: #ffda61;
+
       --purple: #a72cff;
-      --purple-light: #c75aff;
-      --purple-dark: #3b0d52;
+      --purple-light: #c45cff;
 
-      --text: #f8f4ff;
-      --muted: #b9aec4;
+      --white: #f8f4ff;
+      --muted: #b8adbf;
 
-      --bg: #08040c;
-      --panel: #14091b;
+      --dark: #08040d;
+      --panel: #110817;
     }
-
-
-    /* =========================================
-       RESET
-       ========================================= */
 
     * {
       box-sizing: border-box;
     }
 
-
     html {
       scroll-behavior: smooth;
     }
 
-
     body {
-
       margin: 0;
-
       min-height: 100vh;
 
-      position: relative;
-
-      overflow-x: hidden;
-
-      color: var(--text);
+      color: var(--white);
 
       font-family:
         Arial,
         Helvetica,
         sans-serif;
 
-
-      /*
-        HLAVNÍ POZADÍ
-      */
+      overflow-x: hidden;
 
       background:
-
-        radial-gradient(
-          ellipse at 50% -10%,
-          rgba(141, 31, 190, 0.62) 0%,
-          rgba(82, 19, 111, 0.42) 18%,
-          transparent 45%
-        ),
-
-        radial-gradient(
-          ellipse at 8% 35%,
-          rgba(161, 36, 220, 0.18) 0%,
-          transparent 30%
-        ),
-
-        radial-gradient(
-          ellipse at 92% 55%,
-          rgba(205, 142, 19, 0.11) 0%,
-          transparent 28%
-        ),
-
         linear-gradient(
-          135deg,
-          #070309 0%,
-          #120718 25%,
-          #09040d 52%,
-          #17081f 78%,
-          #060208 100%
-        );
+          rgba(7, 3, 12, 0.46),
+          rgba(7, 3, 12, 0.82)
+        ),
+        url("background.png")
+        center top /
+        cover
+        fixed
+        no-repeat,
 
+        #08040d;
     }
 
-
     /*
-      FIALOVÉ SVĚTELNÉ MRAKY
+      Jemná tmavá vrstva přes obrázek,
+      aby produkty a text byly pořád dobře čitelné.
     */
 
     body::before {
-
       content: "";
 
       position: fixed;
-
-      inset: -20%;
-
-      pointer-events: none;
-
-      z-index: -2;
-
-      background:
-
-        radial-gradient(
-          ellipse at 20% 20%,
-          rgba(190, 35, 255, 0.12),
-          transparent 28%
-        ),
-
-        radial-gradient(
-          ellipse at 78% 18%,
-          rgba(255, 174, 34, 0.08),
-          transparent 22%
-        ),
-
-        radial-gradient(
-          ellipse at 55% 85%,
-          rgba(137, 22, 186, 0.13),
-          transparent 30%
-        );
-
-      filter: blur(35px);
-
-      animation:
-        backgroundGlow
-        14s
-        ease-in-out
-        infinite
-        alternate;
-
-    }
-
-
-    /*
-      TEXTURA + DIAGONÁLNÍ TAHY
-    */
-
-    body::after {
-
-      content: "";
-
-      position: fixed;
-
       inset: 0;
 
       pointer-events: none;
 
       z-index: -1;
 
-      opacity: 0.42;
-
       background:
-
-        repeating-linear-gradient(
-          125deg,
-          transparent 0px,
-          transparent 48px,
-          rgba(255,255,255,.012) 49px,
-          transparent 52px
-        ),
-
-        repeating-linear-gradient(
-          -35deg,
-          transparent 0px,
-          transparent 95px,
-          rgba(167,44,255,.018) 96px,
-          transparent 99px
+        radial-gradient(
+          ellipse at center top,
+          rgba(142, 32, 192, 0.10),
+          transparent 42%
         ),
 
         radial-gradient(
-          circle at center,
-          transparent 35%,
-          rgba(0,0,0,.38) 100%
+          ellipse at left,
+          rgba(160, 38, 220, 0.08),
+          transparent 35%
+        ),
+
+        radial-gradient(
+          ellipse at right,
+          rgba(214, 158, 27, 0.05),
+          transparent 30%
         );
-
     }
 
 
-    @keyframes backgroundGlow {
-
-      0% {
-        transform: scale(1);
-        opacity: .8;
-      }
-
-      100% {
-        transform: scale(1.08);
-        opacity: 1;
-      }
-
-    }
-
-
-    /* =========================================
-       HLAVNÍ STRÁNKA
-       ========================================= */
+    /*
+      Velká stránka, aby se 6 karet
+      nemuselo zmenšovat.
+    */
 
     .page {
-
-      width: min(
-        1550px,
-        100%
-      );
+      width: min(1550px, 100%);
 
       margin: 0 auto;
 
       padding:
-
         15px
-
         340px
-
         60px
-
         18px;
-
     }
 
 
@@ -231,26 +115,20 @@
        ========================================= */
 
     .logo-wrap {
-
       display: flex;
 
       justify-content: center;
-
       align-items: center;
 
       padding-bottom: 12px;
-
     }
 
-
     .logo {
-
       display: block;
 
       width: 330px;
 
       max-width: 48%;
-
       max-height: 220px;
 
       object-fit: contain;
@@ -258,17 +136,15 @@
       margin: 0 auto;
 
       filter:
-
         drop-shadow(
           0 0 18px
-          rgba(167,44,255,.55)
+          rgba(167, 44, 255, 0.55)
         )
 
         drop-shadow(
           0 0 35px
-          rgba(167,44,255,.15)
+          rgba(167, 44, 255, 0.16)
         );
-
     }
 
 
@@ -277,7 +153,6 @@
        ========================================= */
 
     .features {
-
       display: grid;
 
       grid-template-columns:
@@ -286,59 +161,48 @@
       gap: 12px;
 
       margin-bottom: 32px;
-
     }
 
-
     .feature {
-
       padding: 18px 12px;
 
       text-align: center;
 
       border:
         1px solid
-        rgba(216,165,26,.65);
+        rgba(216, 165, 26, 0.65);
 
       border-radius: 14px;
 
       background:
-
         radial-gradient(
           circle at 50% 0%,
-          rgba(167,44,255,.08),
+          rgba(167, 44, 255, 0.10),
           transparent 55%
         ),
 
         linear-gradient(
           145deg,
-          #1a0c23,
-          #0b0610
+          rgba(27, 12, 35, 0.94),
+          rgba(9, 5, 13, 0.96)
         );
 
       box-shadow:
-
         inset
         0 1px 0
-        rgba(255,255,255,.025),
+        rgba(255, 255, 255, 0.025),
 
         0 8px 30px
-        rgba(0,0,0,.45);
-
+        rgba(0, 0, 0, 0.46);
     }
 
-
     .feature-icon {
-
       font-size: 28px;
 
       margin-bottom: 7px;
-
     }
 
-
     .feature-title {
-
       display: block;
 
       margin-bottom: 5px;
@@ -349,36 +213,25 @@
       font-size: 14px;
 
       font-weight: 900;
-
     }
 
-
     .feature-text {
-
       color:
         var(--muted);
 
       font-size: 13px;
-
     }
 
 
     /* =========================================
-       NADPIS
+       NADPIS PRODUKTŮ
        ========================================= */
 
     .section-title {
-
-      margin:
-        0
-        0
-        15px;
-
+      margin: 0 0 15px;
     }
 
-
     .section-title h2 {
-
       margin: 0;
 
       color:
@@ -390,17 +243,15 @@
         uppercase;
 
       letter-spacing: 1px;
-
     }
 
 
     /* =========================================
        PRODUKTY
-       6 NA ŘÁDEK
+       6 VELKÝCH KARET NA ŘÁDEK
        ========================================= */
 
     .products {
-
       display: grid;
 
       grid-template-columns:
@@ -413,12 +264,9 @@
         );
 
       gap: 12px;
-
     }
 
-
     .product {
-
       min-width: 175px;
 
       min-height: 185px;
@@ -437,87 +285,66 @@
 
       border:
         1px solid
-        rgba(216,165,26,.60);
+        rgba(216, 165, 26, 0.60);
 
       border-radius: 14px;
 
-
-      /*
-        PRODUKTOVÉ POZADÍ
-      */
-
       background:
-
         radial-gradient(
           circle at 50% 0%,
-          rgba(143,35,190,.18),
+          rgba(143, 35, 190, 0.18),
           transparent 48%
         ),
 
         linear-gradient(
           145deg,
-          #1d0b27,
-          #0b0610 75%
+          rgba(29, 11, 39, 0.94),
+          rgba(11, 6, 16, 0.96)
         );
 
-
       box-shadow:
-
         inset
         0 1px 0
-        rgba(255,255,255,.025),
+        rgba(255, 255, 255, 0.025),
 
         0 8px 28px
-        rgba(0,0,0,.48);
-
+        rgba(0, 0, 0, 0.50);
 
       transition:
-
-        transform .18s ease,
-
-        border-color .18s ease,
-
-        box-shadow .18s ease;
-
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
     }
 
-
     /*
-      SVĚTELNÝ FIALOVÝ EFEKT
+      Jemná fialová záře uvnitř karty.
     */
 
     .product::before {
-
       content: "";
 
       position: absolute;
 
-      width: 130px;
+      width: 140px;
+      height: 140px;
 
-      height: 130px;
-
-      top: -70px;
-
+      top: -75px;
       left: 50%;
 
       transform:
         translateX(-50%);
 
       background:
-
         radial-gradient(
           circle,
-          rgba(171,46,255,.16),
+          rgba(171, 46, 255, 0.16),
           transparent 70%
         );
 
       pointer-events: none;
-
     }
 
-
     .product:hover {
-
       transform:
         translateY(-3px);
 
@@ -525,14 +352,12 @@
         var(--gold-light);
 
       box-shadow:
-
         0 12px 35px
-        rgba(167,44,255,.18),
+        rgba(167, 44, 255, 0.18),
 
         inset
         0 1px 0
-        rgba(255,255,255,.035);
-
+        rgba(255, 255, 255, 0.04);
     }
 
 
@@ -541,7 +366,6 @@
        ========================================= */
 
     .product-icon {
-
       height: 82px;
 
       display: grid;
@@ -559,7 +383,6 @@
       border-radius: 10px;
 
       background:
-
         radial-gradient(
           circle,
           #712099 0%,
@@ -573,11 +396,9 @@
       font-size: 41px;
 
       box-shadow:
-
         inset
         0 0 20px
-        rgba(167,44,255,.12);
-
+        rgba(167, 44, 255, 0.12);
     }
 
 
@@ -586,7 +407,6 @@
        ========================================= */
 
     .product-name {
-
       min-height: 38px;
 
       margin-top: 10px;
@@ -606,7 +426,6 @@
 
       text-transform:
         uppercase;
-
     }
 
 
@@ -615,7 +434,6 @@
        ========================================= */
 
     .quantity {
-
       display: flex;
 
       gap: 5px;
@@ -623,13 +441,10 @@
       position: relative;
 
       z-index: 2;
-
     }
-
 
     .quantity button,
     .quantity input {
-
       height: 38px;
 
       border:
@@ -644,14 +459,10 @@
       color:
         white;
 
-      font-weight:
-        900;
-
+      font-weight: 900;
     }
 
-
     .quantity button {
-
       width: 38px;
 
       font-size: 20px;
@@ -659,13 +470,10 @@
       cursor: pointer;
 
       transition:
-        all .15s ease;
-
+        all 0.15s ease;
     }
 
-
     .quantity button:hover {
-
       background:
         #29102f;
 
@@ -674,23 +482,17 @@
 
       box-shadow:
         0 0 10px
-        rgba(167,44,255,.15);
-
+        rgba(167, 44, 255, 0.16);
     }
 
-
     .quantity input {
-
       width: 65px;
 
       text-align:
         center;
-
     }
 
-
     .quantity input:focus {
-
       outline: none;
 
       border-color:
@@ -698,8 +500,7 @@
 
       box-shadow:
         0 0 10px
-        rgba(167,44,255,.25);
-
+        rgba(167, 44, 255, 0.25);
     }
 
 
@@ -708,13 +509,11 @@
        ========================================= */
 
     .calculator {
-
       position: fixed;
 
       z-index: 9999;
 
       top: 50%;
-
       right: 22px;
 
       transform:
@@ -731,35 +530,31 @@
       border-radius: 20px;
 
       background:
-
         radial-gradient(
           circle at 50% 0%,
-          rgba(167,44,255,.10),
+          rgba(167, 44, 255, 0.11),
           transparent 48%
         ),
 
         linear-gradient(
           145deg,
-          rgba(31,10,42,.98),
-          rgba(8,4,12,.98)
+          rgba(31, 10, 42, 0.98),
+          rgba(8, 4, 12, 0.98)
         );
 
       box-shadow:
 
         0 0 35px
-        rgba(167,44,255,.20),
+        rgba(167, 44, 255, 0.20),
 
         0 20px 50px
-        rgba(0,0,0,.60);
+        rgba(0, 0, 0, 0.62);
 
       backdrop-filter:
         blur(14px);
-
     }
 
-
     .calculator-label {
-
       color:
         var(--gold-light);
 
@@ -771,12 +566,9 @@
 
       text-transform:
         uppercase;
-
     }
 
-
     .calculator-title {
-
       margin-top: 8px;
 
       color:
@@ -787,12 +579,9 @@
       line-height: 1.35;
 
       font-weight: 900;
-
     }
 
-
     .calculator-total-label {
-
       margin-top: 25px;
 
       color:
@@ -803,12 +592,9 @@
       letter-spacing: 1.5px;
 
       font-weight: 900;
-
     }
 
-
     .calculator-total {
-
       margin-top: 3px;
 
       color:
@@ -821,15 +607,11 @@
       font-weight: 900;
 
       text-shadow:
-
         0 0 18px
-        rgba(255,218,97,.18);
-
+        rgba(255, 218, 97, 0.18);
     }
 
-
     .calculator-bonus {
-
       margin-top: 13px;
 
       color:
@@ -840,26 +622,21 @@
       line-height: 1.45;
 
       font-weight: 900;
-
     }
 
-
     .calculator-line {
-
       height: 1px;
 
       margin:
         20px 0;
 
       background:
-
         linear-gradient(
           90deg,
           transparent,
-          rgba(167,44,255,.7),
+          rgba(167, 44, 255, 0.7),
           transparent
         );
-
     }
 
 
@@ -868,7 +645,6 @@
        ========================================= */
 
     .buy-more-title {
-
       color:
         var(--gold-light);
 
@@ -882,15 +658,11 @@
         uppercase;
 
       text-shadow:
-
         0 0 12px
-        rgba(255,218,97,.12);
-
+        rgba(255, 218, 97, 0.12);
     }
 
-
     .buy-more-text {
-
       margin-top: 8px;
 
       color:
@@ -899,7 +671,6 @@
       font-size: 12px;
 
       line-height: 1.5;
-
     }
 
 
@@ -908,7 +679,6 @@
        ========================================= */
 
     .phone-label {
-
       margin-top: 18px;
 
       color:
@@ -922,12 +692,9 @@
 
       text-transform:
         uppercase;
-
     }
 
-
     .phone {
-
       margin-top: 4px;
 
       color:
@@ -938,12 +705,9 @@
       font-weight: 1000;
 
       letter-spacing: 1px;
-
     }
 
-
     .calculator-info {
-
       margin-top: 14px;
 
       color:
@@ -952,7 +716,6 @@
       font-size: 11px;
 
       line-height: 1.45;
-
     }
 
 
@@ -961,7 +724,6 @@
        ========================================= */
 
     footer {
-
       margin-top: 35px;
 
       color:
@@ -971,7 +733,6 @@
         center;
 
       font-size: 12px;
-
     }
 
 
@@ -982,18 +743,14 @@
     @media (max-width: 1400px) {
 
       .page {
-
         width:
           min(
             1350px,
             100%
           );
-
       }
 
-
       .products {
-
         grid-template-columns:
           repeat(
             5,
@@ -1002,9 +759,7 @@
               1fr
             )
           );
-
       }
-
     }
 
 
@@ -1015,15 +770,11 @@
     @media (max-width: 1150px) {
 
       .page {
-
         padding-right:
           330px;
-
       }
 
-
       .products {
-
         grid-template-columns:
           repeat(
             4,
@@ -1032,9 +783,7 @@
               1fr
             )
           );
-
       }
-
     }
 
 
@@ -1045,26 +794,19 @@
     @media (max-width: 900px) {
 
       .page {
-
         padding-right:
           18px;
-
       }
 
-
       .features {
-
         grid-template-columns:
           repeat(
             2,
             1fr
           );
-
       }
 
-
       .products {
-
         grid-template-columns:
           repeat(
             3,
@@ -1073,15 +815,9 @@
               1fr
             )
           );
-
       }
 
-
       .calculator {
-
-        position:
-          fixed;
-
         top:
           auto;
 
@@ -1099,9 +835,7 @@
 
         transform:
           none;
-
       }
-
     }
 
 
@@ -1112,74 +846,47 @@
     @media (max-width: 650px) {
 
       .page {
-
         padding:
-
           10px
-
           10px
-
           190px
-
           10px;
-
       }
 
-
       .logo {
-
         width:
           250px;
 
         max-width:
           72%;
-
       }
-
 
       .features {
-
         gap:
           8px;
-
       }
-
 
       .feature {
-
         padding:
-          14px
-          7px;
-
+          14px 7px;
       }
-
 
       .feature-icon {
-
         font-size:
           23px;
-
       }
-
 
       .feature-title {
-
         font-size:
           12px;
-
       }
-
 
       .feature-text {
-
         font-size:
           11px;
-
       }
 
-
       .products {
-
         grid-template-columns:
           repeat(
             2,
@@ -1191,12 +898,9 @@
 
         gap:
           8px;
-
       }
 
-
       .product {
-
         min-width:
           0;
 
@@ -1205,112 +909,73 @@
 
         padding:
           9px;
-
       }
 
-
       .product-icon {
-
         height:
           70px;
 
         font-size:
           34px;
-
       }
-
 
       .product-name {
-
         font-size:
           12px;
-
       }
 
-
       .calculator {
-
         padding:
-          15px
-          17px;
+          15px 17px;
 
         border-radius:
           16px;
-
       }
-
 
       .calculator-label {
-
         font-size:
           9px;
-
       }
-
 
       .calculator-title {
-
         font-size:
           13px;
-
       }
-
 
       .calculator-total-label {
-
         display:
           none;
-
       }
-
 
       .calculator-total {
-
         font-size:
           31px;
-
       }
-
 
       .calculator-bonus {
-
         font-size:
           12px;
-
       }
-
 
       .buy-more-title {
-
         font-size:
           16px;
-
       }
-
 
       .buy-more-text {
-
         font-size:
           11px;
-
       }
-
 
       .phone {
-
         font-size:
           19px;
-
       }
-
 
       .calculator-info {
-
         display:
           none;
-
       }
-
     }
 
   </style>
@@ -1424,7 +1089,6 @@
 
     <section>
 
-
       <div class="section-title">
 
         <h2>
@@ -1437,9 +1101,7 @@
       <div class="products">
 
 
-        <!-- ==================================
-             PRODUKT 1
-             ================================== -->
+        <!-- 1 -->
 
         <div class="product">
 
@@ -1454,7 +1116,8 @@
           <div class="quantity">
 
             <button
-              onclick="changeQty(0,-1)"
+              type="button"
+              onclick="changeQty(0, -1)"
             >
               −
             </button>
@@ -1467,7 +1130,8 @@
             >
 
             <button
-              onclick="changeQty(0,1)"
+              type="button"
+              onclick="changeQty(0, 1)"
             >
               +
             </button>
@@ -1477,9 +1141,7 @@
         </div>
 
 
-        <!-- ==================================
-             PRODUKT 2
-             ================================== -->
+        <!-- 2 -->
 
         <div class="product">
 
@@ -1494,7 +1156,8 @@
           <div class="quantity">
 
             <button
-              onclick="changeQty(1,-1)"
+              type="button"
+              onclick="changeQty(1, -1)"
             >
               −
             </button>
@@ -1507,7 +1170,8 @@
             >
 
             <button
-              onclick="changeQty(1,1)"
+              type="button"
+              onclick="changeQty(1, 1)"
             >
               +
             </button>
@@ -1517,9 +1181,7 @@
         </div>
 
 
-        <!-- ==================================
-             PRODUKT 3
-             ================================== -->
+        <!-- 3 -->
 
         <div class="product">
 
@@ -1534,7 +1196,8 @@
           <div class="quantity">
 
             <button
-              onclick="changeQty(2,-1)"
+              type="button"
+              onclick="changeQty(2, -1)"
             >
               −
             </button>
@@ -1547,7 +1210,8 @@
             >
 
             <button
-              onclick="changeQty(2,1)"
+              type="button"
+              onclick="changeQty(2, 1)"
             >
               +
             </button>
@@ -1557,9 +1221,7 @@
         </div>
 
 
-        <!-- ==================================
-             PRODUKT 4
-             ================================== -->
+        <!-- 4 -->
 
         <div class="product">
 
@@ -1574,7 +1236,8 @@
           <div class="quantity">
 
             <button
-              onclick="changeQty(3,-1)"
+              type="button"
+              onclick="changeQty(3, -1)"
             >
               −
             </button>
@@ -1587,7 +1250,8 @@
             >
 
             <button
-              onclick="changeQty(3,1)"
+              type="button"
+              onclick="changeQty(3, 1)"
             >
               +
             </button>
@@ -1597,9 +1261,7 @@
         </div>
 
 
-        <!-- ==================================
-             PRODUKT 5
-             ================================== -->
+        <!-- 5 -->
 
         <div class="product">
 
@@ -1614,7 +1276,8 @@
           <div class="quantity">
 
             <button
-              onclick="changeQty(4,-1)"
+              type="button"
+              onclick="changeQty(4, -1)"
             >
               −
             </button>
@@ -1627,7 +1290,8 @@
             >
 
             <button
-              onclick="changeQty(4,1)"
+              type="button"
+              onclick="changeQty(4, 1)"
             >
               +
             </button>
@@ -1637,9 +1301,7 @@
         </div>
 
 
-        <!-- ==================================
-             PRODUKT 6
-             ================================== -->
+        <!-- 6 -->
 
         <div class="product">
 
@@ -1654,7 +1316,8 @@
           <div class="quantity">
 
             <button
-              onclick="changeQty(5,-1)"
+              type="button"
+              onclick="changeQty(5, -1)"
             >
               −
             </button>
@@ -1667,7 +1330,8 @@
             >
 
             <button
-              onclick="changeQty(5,1)"
+              type="button"
+              onclick="changeQty(5, 1)"
             >
               +
             </button>
@@ -1677,9 +1341,7 @@
         </div>
 
 
-        <!-- ==================================
-             PRODUKT 7
-             ================================== -->
+        <!-- 7 -->
 
         <div class="product">
 
@@ -1694,7 +1356,8 @@
           <div class="quantity">
 
             <button
-              onclick="changeQty(6,-1)"
+              type="button"
+              onclick="changeQty(6, -1)"
             >
               −
             </button>
@@ -1707,7 +1370,8 @@
             >
 
             <button
-              onclick="changeQty(6,1)"
+              type="button"
+              onclick="changeQty(6, 1)"
             >
               +
             </button>
@@ -1717,9 +1381,7 @@
         </div>
 
 
-        <!-- ==================================
-             PRODUKT 8
-             ================================== -->
+        <!-- 8 -->
 
         <div class="product">
 
@@ -1734,7 +1396,8 @@
           <div class="quantity">
 
             <button
-              onclick="changeQty(7,-1)"
+              type="button"
+              onclick="changeQty(7, -1)"
             >
               −
             </button>
@@ -1747,7 +1410,8 @@
             >
 
             <button
-              onclick="changeQty(7,1)"
+              type="button"
+              onclick="changeQty(7, 1)"
             >
               +
             </button>
@@ -1757,9 +1421,7 @@
         </div>
 
 
-        <!-- ==================================
-             PRODUKT 9
-             ================================== -->
+        <!-- 9 -->
 
         <div class="product">
 
@@ -1774,7 +1436,8 @@
           <div class="quantity">
 
             <button
-              onclick="changeQty(8,-1)"
+              type="button"
+              onclick="changeQty(8, -1)"
             >
               −
             </button>
@@ -1787,7 +1450,8 @@
             >
 
             <button
-              onclick="changeQty(8,1)"
+              type="button"
+              onclick="changeQty(8, 1)"
             >
               +
             </button>
@@ -1797,9 +1461,7 @@
         </div>
 
 
-        <!-- ==================================
-             PRODUKT 10
-             ================================== -->
+        <!-- 10 -->
 
         <div class="product">
 
@@ -1814,7 +1476,8 @@
           <div class="quantity">
 
             <button
-              onclick="changeQty(9,-1)"
+              type="button"
+              onclick="changeQty(9, -1)"
             >
               −
             </button>
@@ -1827,7 +1490,8 @@
             >
 
             <button
-              onclick="changeQty(9,1)"
+              type="button"
+              onclick="changeQty(9, 1)"
             >
               +
             </button>
@@ -1837,9 +1501,7 @@
         </div>
 
 
-        <!-- ==================================
-             PRODUKT 11
-             ================================== -->
+        <!-- 11 -->
 
         <div class="product">
 
@@ -1854,7 +1516,8 @@
           <div class="quantity">
 
             <button
-              onclick="changeQty(10,-1)"
+              type="button"
+              onclick="changeQty(10, -1)"
             >
               −
             </button>
@@ -1867,7 +1530,8 @@
             >
 
             <button
-              onclick="changeQty(10,1)"
+              type="button"
+              onclick="changeQty(10, 1)"
             >
               +
             </button>
@@ -1877,9 +1541,7 @@
         </div>
 
 
-        <!-- ==================================
-             PRODUKT 12
-             ================================== -->
+        <!-- 12 -->
 
         <div class="product">
 
@@ -1894,7 +1556,8 @@
           <div class="quantity">
 
             <button
-              onclick="changeQty(11,-1)"
+              type="button"
+              onclick="changeQty(11, -1)"
             >
               −
             </button>
@@ -1907,7 +1570,8 @@
             >
 
             <button
-              onclick="changeQty(11,1)"
+              type="button"
+              onclick="changeQty(11, 1)"
             >
               +
             </button>
@@ -1922,7 +1586,9 @@
     </section>
 
 
-    <!-- FOOTER -->
+    <!-- =======================================
+         FOOTER
+         ======================================= -->
 
     <footer>
 
@@ -1943,16 +1609,14 @@
 
 
   <!-- =========================================
-       PEVNÝ PANEL
+       PEVNÝ KALKULAČNÍ PANEL
        ========================================= -->
 
   <aside class="calculator">
 
 
     <div class="calculator-label">
-
       ORIENTAČNÍ VÝKUP
-
     </div>
 
 
@@ -1965,9 +1629,7 @@
 
 
     <div class="calculator-total-label">
-
       CELKEM
-
     </div>
 
 
@@ -1975,9 +1637,7 @@
       id="total"
       class="calculator-total"
     >
-
       $0
-
     </div>
 
 
@@ -1985,9 +1645,7 @@
       id="bonus"
       class="calculator-bonus"
     >
-
       Vyberte množství produktů
-
     </div>
 
 
@@ -2011,24 +1669,20 @@
 
 
     <div class="phone-label">
-
       Zavolejte nám
-
     </div>
 
 
     <div class="phone">
-
       (520) 871-800
-
     </div>
 
 
     <div class="calculator-info">
 
       Výpočet se automaticky
-      přepočítává podle zadaného
-      množství.
+      přepočítává podle
+      zadaného množství.
 
     </div>
 
@@ -2038,107 +1692,86 @@
 
   <script>
 
-    /* =========================================
-       VÝKUPNÍ CENY
-       ========================================= */
+    /*
+      =========================================
+      VÝKUPNÍ CENY
+      =========================================
+    */
 
     const prices = [
 
-      250,
-      50,
-      550,
-      80,
-      70,
-      75,
-      60,
-      10,
-      45,
-      125,
-      50,
-      120
+      250,  // Baterky na zbraň
+      50,   // Zlaté mince
+      550,  // Zvláštní karty
+      80,   // Zlaté prsteny
+      70,   // Náhrdelníky
+      75,   // Hodinky
+      60,   // Klenoty
+      10,   // Autodíly
+      45,   // Semínka
+      125,  // Golfová hůl
+      50,   // Sada na čištění zbraní
+      120   // Kulečníkové tágo
 
     ];
 
 
-    /* =========================================
-       BONUS
-       =========================================
+    /*
+      =========================================
+      BONUS
+      =========================================
 
-       1000+  = 5 %
-       2500+  = 10 %
-
+      1000+  = 5 %
+      2500+  = 10 %
     */
-
 
     function getBonusRate(total) {
 
-      if (
-        total >= 2500
-      ) {
-
+      if (total >= 2500) {
         return 0.10;
-
       }
 
-
-      if (
-        total >= 1000
-      ) {
-
+      if (total >= 1000) {
         return 0.05;
-
       }
-
 
       return 0;
-
     }
 
 
-    /* =========================================
-       ZMĚNA MNOŽSTVÍ
-       ========================================= */
+    /*
+      =========================================
+      + / -
+      =========================================
+    */
 
-    function changeQty(
-      index,
-      amount
-    ) {
+    function changeQty(index, amount) {
 
       const input =
         document.getElementById(
           "q" + index
         );
 
-
       let value =
-        parseInt(
-          input.value
-        ) || 0;
-
+        parseInt(input.value) || 0;
 
       value += amount;
 
-
-      if (
-        value < 0
-      ) {
-
+      if (value < 0) {
         value = 0;
-
       }
-
 
       input.value = value;
 
-
       calculateTotal();
-
     }
 
 
-    /* =========================================
-       VÝPOČET
-       ========================================= */
+    /*
+      =========================================
+      VÝPOČET
+      =========================================
+    */
 
     function calculateTotal() {
 
@@ -2156,12 +1789,8 @@
             "q" + i
           );
 
-
         const quantity =
-          parseInt(
-            input.value
-          ) || 0;
-
+          parseInt(input.value) || 0;
 
         subtotal +=
           quantity *
@@ -2187,17 +1816,13 @@
 
 
       /*
-        ZOBRAZENÍ CELKEM
+        CELKEM
       */
 
       document
-        .getElementById(
-          "total"
-        )
+        .getElementById("total")
         .textContent =
-
           "$" +
-
           total.toLocaleString(
             "en-US",
             {
@@ -2207,7 +1832,7 @@
 
 
       /*
-        BONUS
+        BONUS TEXT
       */
 
       const bonusElement =
@@ -2216,43 +1841,31 @@
         );
 
 
-      if (
-        subtotal === 0
-      ) {
+      if (subtotal === 0) {
 
         bonusElement.textContent =
           "Vyberte množství produktů";
 
         return;
-
       }
 
 
-      if (
-        bonusRate > 0
-      ) {
+      if (bonusRate > 0) {
 
         bonusElement.textContent =
-
           "BONUS +" +
-
           Math.round(
             bonus
           ).toLocaleString(
             "en-US"
           ) +
-
           " (" +
-
           (
             bonusRate * 100
           ) +
-
           " %)";
 
-
         return;
-
       }
 
 
@@ -2262,9 +1875,11 @@
     }
 
 
-    /* =========================================
-       RUČNÍ ZADÁNÍ POČTU
-       ========================================= */
+    /*
+      =========================================
+      RUČNÍ ZADÁNÍ
+      =========================================
+    */
 
     document
       .querySelectorAll(
@@ -2284,11 +1899,13 @@
 
     /*
       PRVNÍ VÝPOČET
+      =========================================
     */
 
     calculateTotal();
 
   </script>
+
 
 </body>
 </html>
