@@ -1,1 +1,836 @@
-<!doctype html><html lang="cs"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="theme-color" content="#17001f"/><title>POINTO LLC — Pawnshop</title></head><body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body></html>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>POINTO LLC — Pawnshop</title>
+
+  <style>
+    :root {
+      --bg: #08040d;
+      --panel: #13091a;
+      --panel2: #1b0b25;
+      --gold: #d8a51a;
+      --gold-light: #ffdc67;
+      --purple: #a82cff;
+      --purple-dark: #430d61;
+      --text: #f8f3ff;
+      --muted: #b9adbf;
+      --border: rgba(216, 165, 26, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, #40104f 0%, #170a1e 35%, #070308 78%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(168, 44, 255, 0.05) 45%,
+          transparent 60%
+        );
+    }
+
+    .container {
+      width: min(1180px, 100%);
+      margin: auto;
+      padding: 25px 18px 50px;
+    }
+
+    .hero {
+      text-align: center;
+    }
+
+    .logo {
+      width: min(650px, 95%);
+      max-height: 430px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 30px rgba(168, 44, 255, 0.45));
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 9px 18px;
+      border: 1px solid var(--gold);
+      border-radius: 999px;
+      color: var(--gold-light);
+      background: #0c0710;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      margin: 16px 0 5px;
+      font-size: clamp(30px, 5vw, 58px);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .intro {
+      max-width: 700px;
+      margin: 0 auto 32px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 35px;
+    }
+
+    .feature {
+      padding: 18px;
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: linear-gradient(145deg, #1c0b25, #0b0610);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .feature-icon {
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .feature-title {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--gold-light);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .feature-text {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 15px;
+      margin-bottom: 16px;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      color: var(--gold-light);
+      font-size: 29px;
+    }
+
+    .section-header span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .product {
+      padding: 14px;
+      min-height: 175px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(28, 11, 37, .98),
+          rgba(8, 5, 12, .98)
+        );
+
+      box-shadow: 0 8px 30px rgba(0,0,0,.35);
+    }
+
+    .product-icon {
+      height: 80px;
+      display: grid;
+      place-items: center;
+
+      border-radius: 11px;
+      border: 1px solid #6f4e0e;
+
+      background:
+        radial-gradient(
+          circle at center,
+          #711f96 0%,
+          #260b34 62%,
+          #120817 100%
+        );
+
+      font-size: 40px;
+    }
+
+    .product-name {
+      margin: 10px 0;
+      min-height: 37px;
+
+      font-size: 14px;
+      line-height: 1.3;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .quantity {
+      display: flex;
+      gap: 6px;
+    }
+
+    .quantity button,
+    .quantity input {
+      height: 38px;
+      border: 1px solid #735313;
+      border-radius: 8px;
+      background: #09060c;
+      color: white;
+      font-weight: 900;
+    }
+
+    .quantity button {
+      width: 40px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .quantity button:hover {
+      background: #27102f;
+    }
+
+    .quantity input {
+      width: 70px;
+      text-align: center;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 22px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+
+      border: 1px solid var(--purple);
+      border-radius: 16px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #190b20,
+          #0a050d
+        );
+
+      box-shadow:
+        0 0 35px rgba(168,44,255,.13);
+    }
+
+    .result-label {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .result-total {
+      margin-top: 3px;
+      color: var(--gold-light);
+      font-size: 43px;
+      font-weight: 900;
+    }
+
+    .bonus {
+      color: #d59cff;
+      font-weight: 900;
+      text-align: right;
+    }
+
+    .cta {
+      margin-top: 30px;
+      padding: 28px;
+      text-align: center;
+
+      border: 1px solid #54286b;
+      border-radius: 17px;
+
+      background:
+        linear-gradient(
+          120deg,
+          #1c0925,
+          #0b050f
+        );
+    }
+
+    .cta h3 {
+      margin: 0 0 8px;
+      color: var(--gold-light);
+      font-size: 26px;
+    }
+
+    .cta p {
+      margin: 5px 0;
+      color: var(--muted);
+    }
+
+    .phone {
+      margin-top: 12px;
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    footer {
+      margin-top: 35px;
+      text-align: center;
+      color: #887b91;
+      font-size: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 550px) {
+      .container {
+        padding: 15px 10px 40px;
+      }
+
+      .features {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .feature {
+        padding: 13px 8px;
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+
+      .product {
+        padding: 9px;
+        min-height: 160px;
+      }
+
+      .product-name {
+        font-size: 12px;
+      }
+
+      .result {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .bonus {
+        text-align: left;
+      }
+
+      .section-header {
+        display: block;
+      }
+
+      .section-header span {
+        display: block;
+        margin-top: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <header class="hero">
+
+    <!-- SOUBOR public-logo.png MUSÍ BÝT VE STEJNÉM REPozitáři -->
+    <img
+      class="logo"
+      src="public-logo.png"
+      alt="POINTO LLC Pawnshop"
+    >
+
+    <div class="badge">
+      PAWNSHOP • LOS SANTOS
+    </div>
+
+    <h1>VŠE MÁ HODNOTU</h1>
+
+    <div class="intro">
+      Vyberte produkty, zadejte jejich počet a okamžitě zjistíte
+      orientační hodnotu vašeho výkupu.
+    </div>
+
+  </header>
+
+
+  <section class="features">
+
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <span class="feature-title">
+        RYCHLÝ VÝKUP
+      </span>
+      <span class="feature-text">
+        Hotovost bez čekání
+      </span>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">⚖️</div>
+      <span class="feature-title">
+        FAIR CENY
+      </span>
+      <span class="feature-text">
+        Férové nabídky
+      </span>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🛡️</div>
+      <span class="feature-title">
+        DISKRÉTNÍ JEDNÁNÍ
+      </span>
+      <span class="feature-text">
+        Vaše soukromí
+      </span>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🤝</div>
+      <span class="feature-title">
+        FÉROVÉ PODMÍNKY
+      </span>
+      <span class="feature-text">
+        Bez zbytečností
+      </span>
+    </div>
+
+  </section>
+
+
+  <section>
+
+    <div class="section-header">
+      <h2>CO VYKUPUJEME</h2>
+
+      <span>
+        Ceny zákazník nevidí.
+      </span>
+    </div>
+
+
+    <div class="products">
+
+      <div class="product">
+        <div class="product-icon">◈</div>
+        <div class="product-name">
+          Baterky na zbraň
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQuantity(0, -1)">−</button>
+          <input id="q0" type="number" min="0" value="0">
+          <button onclick="changeQuantity(0, 1)">+</button>
+        </div>
+      </div>
+
+
+      <div class="product">
+        <div class="product-icon">◆</div>
+        <div class="product-name">
+          Zlaté mince
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQuantity(1, -1)">−</button>
+          <input id="q1" type="number" min="0" value="0">
+          <button onclick="changeQuantity(1, 1)">+</button>
+        </div>
+      </div>
+
+
+      <div class="product">
+        <div class="product-icon">▣</div>
+        <div class="product-name">
+          Zvláštní karty
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQuantity(2, -1)">−</button>
+          <input id="q2" type="number" min="0" value="0">
+          <button onclick="changeQuantity(2, 1)">+</button>
+        </div>
+      </div>
+
+
+      <div class="product">
+        <div class="product-icon">♢</div>
+        <div class="product-name">
+          Zlaté prsteny
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQuantity(3, -1)">−</button>
+          <input id="q3" type="number" min="0" value="0">
+          <button onclick="changeQuantity(3, 1)">+</button>
+        </div>
+      </div>
+
+
+      <div class="product">
+        <div class="product-icon">✦</div>
+        <div class="product-name">
+          Náhrdelníky
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQuantity(4, -1)">−</button>
+          <input id="q4" type="number" min="0" value="0">
+          <button onclick="changeQuantity(4, 1)">+</button>
+        </div>
+      </div>
+
+
+      <div class="product">
+        <div class="product-icon">⌚</div>
+        <div class="product-name">
+          Hodinky
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQuantity(5, -1)">−</button>
+          <input id="q5" type="number" min="0" value="0">
+          <button onclick="changeQuantity(5, 1)">+</button>
+        </div>
+      </div>
+
+
+      <div class="product">
+        <div class="product-icon">💎</div>
+        <div class="product-name">
+          Klenoty
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQuantity(6, -1)">−</button>
+          <input id="q6" type="number" min="0" value="0">
+          <button onclick="changeQuantity(6, 1)">+</button>
+        </div>
+      </div>
+
+
+      <div class="product">
+        <div class="product-icon">▰</div>
+        <div class="product-name">
+          Autodíly
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQuantity(7, -1)">−</button>
+          <input id="q7" type="number" min="0" value="0">
+          <button onclick="changeQuantity(7, 1)">+</button>
+        </div>
+      </div>
+
+
+      <div class="product">
+        <div class="product-icon">✺</div>
+        <div class="product-name">
+          Semínka
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQuantity(8, -1)">−</button>
+          <input id="q8" type="number" min="0" value="0">
+          <button onclick="changeQuantity(8, 1)">+</button>
+        </div>
+      </div>
+
+
+      <div class="product">
+        <div class="product-icon">⛳</div>
+        <div class="product-name">
+          Golfová hůl
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQuantity(9, -1)">−</button>
+          <input id="q9" type="number" min="0" value="0">
+          <button onclick="changeQuantity(9, 1)">+</button>
+        </div>
+      </div>
+
+
+      <div class="product">
+        <div class="product-icon">⚙</div>
+        <div class="product-name">
+          Sada na čištění zbraní
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQuantity(10, -1)">−</button>
+          <input id="q10" type="number" min="0" value="0">
+          <button onclick="changeQuantity(10, 1)">+</button>
+        </div>
+      </div>
+
+
+      <div class="product">
+        <div class="product-icon">🎱</div>
+        <div class="product-name">
+          Kulečníkové tágo
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQuantity(11, -1)">−</button>
+          <input id="q11" type="number" min="0" value="0">
+          <button onclick="changeQuantity(11, 1)">+</button>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="result">
+
+    <div>
+      <div class="result-label">
+        ORIENTAČNÍ VÝKUP CELKEM
+      </div>
+
+      <div
+        id="total"
+        class="result-total"
+      >
+        $0
+      </div>
+    </div>
+
+    <div
+      id="bonus"
+      class="bonus"
+    >
+      Vyberte položky pro výpočet
+    </div>
+
+  </section>
+
+
+  <section class="cta">
+
+    <h3>
+      VYKUPUJEME MNOHEM VÍCE!
+    </h3>
+
+    <p>
+      Přineste, co nepotřebujete — odnesete si hotovost.
+    </p>
+
+    <div class="phone">
+      (520) 871-800
+    </div>
+
+  </section>
+
+
+  <footer>
+    POINTO LLC • PAWNSHOP • LOS SANTOS
+    • Cash Today / Better Tomorrow
+  </footer>
+
+</div>
+
+
+<script>
+
+  /*
+    INTERNÍ VÝKUPNÍ CENY
+
+    Zákazník je přímo v HTML nevidí,
+    ale jsou zde kvůli kalkulačce.
+
+    Až uděláme Supabase,
+    přesuneme je kompletně do databáze.
+  */
+
+  const prices = [
+    250, // Baterky
+    50,  // Zlaté mince
+    550, // Karty
+    80,  // Zlaté prsteny
+    70,  // Náhrdelníky
+    75,  // Hodinky
+    60,  // Klenoty
+    10,  // Autodíly
+    45,  // Semínka
+    125, // Golfová hůl
+    50,  // Čisticí sada
+    120  // Kulečníkové tágo
+  ];
+
+
+  /*
+    BONUS:
+
+    1000+  = +5 %
+    2500+  = +10 %
+  */
+
+  function getBonusRate(total) {
+
+    if (total >= 2500) {
+      return 0.10;
+    }
+
+    if (total >= 1000) {
+      return 0.05;
+    }
+
+    return 0;
+  }
+
+
+  function changeQuantity(index, change) {
+
+    const input =
+      document.getElementById("q" + index);
+
+    let value =
+      parseInt(input.value) || 0;
+
+    value += change;
+
+    if (value < 0) {
+      value = 0;
+    }
+
+    input.value = value;
+
+    calculate();
+  }
+
+
+  function calculate() {
+
+    let subtotal = 0;
+
+    for (let i = 0; i < prices.length; i++) {
+
+      const quantityInput =
+        document.getElementById("q" + i);
+
+      const quantity =
+        parseInt(quantityInput.value) || 0;
+
+      subtotal += quantity * prices[i];
+    }
+
+
+    const bonusRate =
+      getBonusRate(subtotal);
+
+    const bonus =
+      subtotal * bonusRate;
+
+    const total =
+      subtotal + bonus;
+
+
+    document.getElementById("total").textContent =
+      "$" +
+      total.toLocaleString("en-US", {
+        maximumFractionDigits: 0
+      });
+
+
+    const bonusElement =
+      document.getElementById("bonus");
+
+
+    if (subtotal === 0) {
+
+      bonusElement.textContent =
+        "Vyberte položky pro výpočet";
+
+      return;
+    }
+
+
+    if (bonusRate > 0) {
+
+      bonusElement.textContent =
+        "BONUS +" +
+        Math.round(bonus).toLocaleString("en-US") +
+        " (" +
+        (bonusRate * 100) +
+        " %)";
+
+      return;
+    }
+
+
+    bonusElement.textContent =
+      "Při vyšší hodnotě můžete získat bonus.";
+  }
+
+
+  /*
+    Automatický přepočet po ručním napsání počtu.
+  */
+
+  document
+    .querySelectorAll(".quantity input")
+    .forEach(input => {
+
+      input.addEventListener(
+        "input",
+        calculate
+      );
+
+    });
+
+
+  calculate();
+
+</script>
+
+</body>
+</html>
