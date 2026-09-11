@@ -7,14 +7,15 @@
   <title>POINTO LLC — Pawnshop</title>
 
   <style>
-
     :root {
       --gold: #d9a51b;
       --gold-light: #ffda61;
       --purple: #a72cff;
-      --purple-dark: #430d61;
-      --text: #f7f2ff;
-      --muted: #bdb2c8;
+      --purple-dark: #3a0d50;
+      --bg: #08040c;
+      --panel: #14091b;
+      --text: #f8f4ff;
+      --muted: #b9aec4;
     }
 
     * {
@@ -28,96 +29,71 @@
     body {
       margin: 0;
       min-height: 100vh;
-
       color: var(--text);
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
 
       background:
         radial-gradient(
           circle at 50% 0%,
-          #46115b 0%,
-          #1a0a23 35%,
-          #070308 80%
+          #4a125e 0%,
+          #1d0b27 30%,
+          #09040d 75%
         );
     }
-
-    body::before {
-      content: "";
-
-      position: fixed;
-      inset: 0;
-
-      pointer-events: none;
-
-      background:
-        linear-gradient(
-          120deg,
-          transparent 40%,
-          rgba(167, 44, 255, 0.04) 50%,
-          transparent 60%
-        );
-    }
-
 
     /* =========================================
        HLAVNÍ OBSAH
        ========================================= */
 
-    .wrap {
+    .page {
       width: min(1180px, 100%);
-
       margin: 0 auto;
 
+      /*
+        Na desktopu necháváme napravo místo
+        pro pevný kalkulační panel.
+      */
       padding:
         15px
         340px
-        55px
+        60px
         18px;
     }
-
 
     /* =========================================
        LOGO
        ========================================= */
 
-    .hero {
+    .logo-wrap {
       display: flex;
-
       justify-content: center;
       align-items: center;
 
-      padding-bottom: 8px;
+      padding-bottom: 15px;
     }
 
     .logo {
       display: block;
 
-      width: min(330px, 48%);
-
+      width: 330px;
+      max-width: 48%;
       max-height: 220px;
 
       object-fit: contain;
 
-      margin: 0 auto;
-
       filter:
         drop-shadow(
           0 0 18px
-          rgba(167, 44, 255, .55)
+          rgba(167, 44, 255, 0.55)
         )
         drop-shadow(
           0 0 35px
-          rgba(167, 44, 255, .18)
+          rgba(167, 44, 255, 0.15)
         );
     }
 
-
     /* =========================================
-       HORNÍ INFO KARTY
+       INFO KARTY
        ========================================= */
 
     .features {
@@ -128,40 +104,34 @@
 
       gap: 12px;
 
-      margin:
-        15px
-        0
-        30px;
+      margin-bottom: 32px;
     }
 
     .feature {
-      padding:
-        18px
-        12px;
+      padding: 18px 10px;
 
       text-align: center;
 
       border:
         1px solid
-        rgba(216, 165, 26, .65);
+        rgba(216, 165, 26, 0.65);
 
       border-radius: 14px;
 
       background:
         linear-gradient(
           145deg,
-          #170d20,
-          #0b0710
+          #1a0c23,
+          #0b0610
         );
 
       box-shadow:
         0 8px 30px
-        rgba(0, 0, 0, .5);
+        rgba(0, 0, 0, 0.45);
     }
 
     .feature-icon {
-      font-size: 28px;
-
+      font-size: 27px;
       margin-bottom: 7px;
     }
 
@@ -170,162 +140,149 @@
 
       margin-bottom: 5px;
 
-      color:
-        var(--gold-light);
+      color: var(--gold-light);
 
       font-size: 14px;
-
       font-weight: 900;
     }
 
     .feature-text {
-      color:
-        var(--muted);
-
+      color: var(--muted);
       font-size: 13px;
     }
 
-
     /* =========================================
-       NADPIS PRODUKTŮ
+       NADPIS
        ========================================= */
 
     .section-title {
-      margin:
-        30px
-        0
-        15px;
+      margin: 0 0 15px;
     }
 
     .section-title h2 {
       margin: 0;
 
-      color:
-        var(--gold-light);
+      color: var(--gold-light);
 
-      font-size: 28px;
+      font-size: 29px;
+      letter-spacing: 1px;
 
       text-transform: uppercase;
-
-      letter-spacing: 1px;
     }
-
 
     /* =========================================
        PRODUKTY
        ========================================= */
 
-    .grid {
+    .products {
       display: grid;
 
+      /*
+        5 PRODUKTŮ NA ŘÁDEK
+      */
       grid-template-columns:
-        repeat(4, 1fr);
+        repeat(5, minmax(0, 1fr));
 
       gap: 12px;
     }
 
     .product {
+      min-width: 0;
+
       min-height: 175px;
 
-      padding: 14px;
+      padding: 12px;
 
       display: flex;
-
       flex-direction: column;
-
       justify-content: space-between;
 
       border:
         1px solid
-        rgba(216, 165, 26, .6);
+        rgba(216, 165, 26, 0.6);
 
       border-radius: 14px;
 
       background:
         linear-gradient(
           145deg,
-          #170d20,
-          #0b0710
+          #190c22,
+          #0a050e
         );
 
       box-shadow:
-        0 8px 30px
-        rgba(0, 0, 0, .5);
+        0 8px 28px
+        rgba(0, 0, 0, 0.42);
 
       transition:
-        transform .18s ease,
-        border-color .18s ease,
-        box-shadow .18s ease;
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
     }
 
     .product:hover {
-      transform:
-        translateY(-3px);
+      transform: translateY(-3px);
 
       border-color:
         var(--gold-light);
 
       box-shadow:
         0 12px 35px
-        rgba(167, 44, 255, .15);
+        rgba(167, 44, 255, 0.15);
     }
 
-    .product-art {
+    .product-icon {
       height: 78px;
 
       display: grid;
-
       place-items: center;
-
-      border-radius: 10px;
 
       border:
         1px solid
         #6c4c12;
 
+      border-radius: 10px;
+
       background:
         radial-gradient(
           circle,
-          #6e1a91,
-          #1b0d25 65%
+          #712099 0%,
+          #271031 58%,
+          #130818 100%
         );
 
-      color:
-        var(--gold-light);
+      color: var(--gold-light);
 
-      font-size: 42px;
+      font-size: 40px;
     }
 
     .product-name {
+      min-height: 38px;
+
       margin-top: 10px;
 
-      min-height: 36px;
+      color: #f8f3ff;
 
-      color: #f5effa;
-
-      font-size: 14px;
-
+      font-size: 13px;
+      line-height: 1.25;
       font-weight: 900;
-
-      line-height: 1.3;
 
       text-transform: uppercase;
     }
-
 
     /* =========================================
        MNOŽSTVÍ
        ========================================= */
 
-    .qty {
+    .quantity {
       display: flex;
 
-      gap: 6px;
+      gap: 5px;
     }
 
-    .qty button,
-    .qty input {
-      height: 38px;
+    .quantity button,
+    .quantity input {
+      height: 37px;
 
       border:
         1px solid
@@ -333,38 +290,39 @@
 
       border-radius: 8px;
 
-      background:
-        #09060c;
+      background: #09060c;
 
-      color:
-        white;
+      color: white;
 
-      font-weight: 800;
+      font-weight: 900;
     }
 
-    .qty button {
-      width: 38px;
+    .quantity button {
+      width: 37px;
 
       font-size: 20px;
 
       cursor: pointer;
-
-      transition:
-        background .15s ease;
     }
 
-    .qty button:hover {
-      background:
-        #29102f;
+    .quantity button:hover {
+      background: #29102f;
+
+      border-color:
+        var(--purple);
     }
 
-    .qty input {
-      width: 70px;
+    .quantity input {
+      width: 58px;
+
+      min-width: 0;
 
       text-align: center;
+
+      font-size: 14px;
     }
 
-    .qty input:focus {
+    .quantity input:focus {
       outline: none;
 
       border-color:
@@ -372,29 +330,27 @@
 
       box-shadow:
         0 0 10px
-        rgba(167, 44, 255, .25);
+        rgba(167, 44, 255, 0.25);
     }
 
-
     /* =========================================
-       FIXNÍ PANEL VPRAVO
+       PEVNÝ PANEL VPRAVO
        ========================================= */
 
-    .result-panel {
+    .calculator {
       position: fixed;
 
-      z-index: 9999;
-
       top: 50%;
-
       right: 22px;
 
       transform:
         translateY(-50%);
 
+      z-index: 9999;
+
       width: 295px;
 
-      padding: 23px;
+      padding: 22px;
 
       border:
         1px solid
@@ -405,25 +361,21 @@
       background:
         linear-gradient(
           145deg,
-          rgba(29, 10, 38, .98),
-          rgba(8, 4, 12, .98)
+          rgba(31, 10, 42, 0.98),
+          rgba(8, 4, 12, 0.98)
         );
 
       box-shadow:
         0 0 35px
-        rgba(167, 44, 255, .18),
-
-        0 18px 50px
-        rgba(0, 0, 0, .6);
+        rgba(167, 44, 255, 0.20),
+        0 20px 50px
+        rgba(0, 0, 0, 0.60);
 
       backdrop-filter:
         blur(14px);
     }
 
-
-    /* horní část panelu */
-
-    .result-top-label {
+    .calculator-label {
       color:
         var(--gold-light);
 
@@ -436,37 +388,32 @@
       text-transform: uppercase;
     }
 
-    .result-top-title {
+    .calculator-title {
       margin-top: 8px;
 
-      color:
-        #ffffff;
+      color: white;
 
       font-size: 17px;
 
-      font-weight: 800;
-
       line-height: 1.35;
+
+      font-weight: 900;
     }
 
+    .calculator-total-label {
+      margin-top: 25px;
 
-    /* celková cena */
-
-    .result-total-label {
-      margin-top: 24px;
-
-      color:
-        var(--muted);
+      color: var(--muted);
 
       font-size: 11px;
 
       letter-spacing: 1.5px;
 
-      font-weight: 800;
+      font-weight: 900;
     }
 
-    .result-total {
-      margin-top: 4px;
+    .calculator-total {
+      margin-top: 3px;
 
       color:
         var(--gold-light);
@@ -479,31 +426,22 @@
 
       text-shadow:
         0 0 18px
-        rgba(255, 218, 97, .18);
+        rgba(255, 218, 97, 0.18);
     }
 
-
-    /* bonus */
-
-    .bonus {
+    .calculator-bonus {
       margin-top: 13px;
 
-      color:
-        #d9a6ff;
+      color: #d9a6ff;
 
       font-size: 14px;
 
-      font-weight: 900;
-
       line-height: 1.45;
 
-      text-align: left;
+      font-weight: 900;
     }
 
-
-    /* oddělovací čára */
-
-    .panel-line {
+    .calculator-line {
       height: 1px;
 
       margin:
@@ -514,204 +452,119 @@
         linear-gradient(
           90deg,
           transparent,
-          rgba(167,44,255,.7),
+          rgba(167, 44, 255, 0.7),
           transparent
         );
     }
-
 
     /* =========================================
        VYKUPUJEME MNOHEM VÍCE
        ========================================= */
 
-    .panel-buy-more {
-      padding:
-        14px
-        0
-        4px;
-    }
-
-    .panel-buy-more-title {
+    .buy-more-title {
       color:
         var(--gold-light);
 
       font-size: 19px;
 
-      font-weight: 1000;
-
       line-height: 1.15;
 
-      text-transform: uppercase;
+      font-weight: 1000;
 
-      text-shadow:
-        0 0 12px
-        rgba(255, 218, 97, .12);
+      text-transform: uppercase;
     }
 
-    .panel-buy-more-text {
-      margin-top: 7px;
+    .buy-more-text {
+      margin-top: 8px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
       font-size: 12px;
 
       line-height: 1.5;
     }
 
-
     /* =========================================
        TELEFON
        ========================================= */
 
-    .panel-phone-label {
-      margin-top: 17px;
+    .phone-label {
+      margin-top: 18px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
       font-size: 10px;
 
-      font-weight: 800;
-
       letter-spacing: 1.5px;
+
+      font-weight: 900;
 
       text-transform: uppercase;
     }
 
-    .panel-phone {
-      margin-top: 3px;
+    .phone {
+      margin-top: 4px;
 
-      color:
-        #ffffff;
+      color: white;
 
       font-size: 24px;
+
+      line-height: 1;
 
       font-weight: 1000;
 
       letter-spacing: 1px;
     }
 
+    .calculator-info {
+      margin-top: 14px;
 
-    /* =========================================
-       MALÝ POPIS
-       ========================================= */
-
-    .panel-info {
-      margin-top: 13px;
-
-      color:
-        #9c8ca4;
+      color: #9d8da5;
 
       font-size: 11px;
 
-      line-height: 1.5;
+      line-height: 1.45;
     }
-
-
-    /* =========================================
-       SPODNÍ KONTAKTNÍ BOX
-       ========================================= */
-
-    .bottom-cta {
-      margin-top: 28px;
-
-      padding: 26px;
-
-      text-align: center;
-
-      border:
-        1px solid
-        #4f2763;
-
-      border-radius: 15px;
-
-      background:
-        linear-gradient(
-          120deg,
-          #180b20,
-          #0a060e
-        );
-    }
-
-    .bottom-cta h3 {
-      margin:
-        0
-        0
-        8px;
-
-      color:
-        var(--gold-light);
-
-      font-size: 24px;
-    }
-
-    .bottom-cta p {
-      margin: 5px 0;
-
-      color:
-        var(--muted);
-    }
-
-    .bottom-phone {
-      margin-top: 10px;
-
-      font-size: 28px;
-
-      font-weight: 900;
-
-      letter-spacing: 2px;
-    }
-
 
     /* =========================================
        FOOTER
        ========================================= */
 
     footer {
-      margin-top: 30px;
+      margin-top: 35px;
+
+      color: #8f8297;
 
       text-align: center;
 
-      color:
-        #8f8297;
-
-      font-size: 13px;
+      font-size: 12px;
     }
-
 
     /* =========================================
        TABLET
        ========================================= */
 
-    @media (max-width: 1100px) {
+    @media (max-width: 1150px) {
 
-      .wrap {
+      .page {
         padding-right: 330px;
       }
 
-      .result-panel {
-        right: 14px;
-
-        width: 285px;
-      }
-
-      .grid {
+      .products {
         grid-template-columns:
-          repeat(3, 1fr);
+          repeat(4, minmax(0, 1fr));
       }
 
     }
-
 
     /* =========================================
        MENŠÍ TABLET
        ========================================= */
 
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
 
-      .wrap {
-        padding-right: 18px;
+      .page {
+        padding-right: 320px;
       }
 
       .features {
@@ -719,62 +572,46 @@
           repeat(2, 1fr);
       }
 
-      .grid {
+      .products {
         grid-template-columns:
-          repeat(2, 1fr);
+          repeat(3, minmax(0, 1fr));
       }
 
-      .result-panel {
-        position: fixed;
-
-        top: auto;
-
-        bottom: 15px;
-
-        left: 15px;
-
-        right: 15px;
-
-        width: auto;
-
-        transform: none;
-      }
-
-      .panel-phone {
-        font-size: 21px;
+      .calculator {
+        width: 275px;
+        right: 12px;
       }
 
     }
-
 
     /* =========================================
        MOBIL
        ========================================= */
 
-    @media (max-width: 550px) {
+    @media (max-width: 700px) {
 
-      .wrap {
+      .page {
         padding:
           10px
           10px
-          175px
+          180px
           10px;
       }
 
       .logo {
         width: 250px;
-
         max-width: 72%;
       }
 
       .features {
+        grid-template-columns:
+          repeat(2, 1fr);
+
         gap: 8px;
       }
 
       .feature {
-        padding:
-          14px
-          7px;
+        padding: 14px 7px;
       }
 
       .feature-icon {
@@ -789,65 +626,81 @@
         font-size: 11px;
       }
 
-      .grid {
+      .products {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+
         gap: 8px;
       }
 
       .product {
         min-height: 160px;
-
         padding: 9px;
+      }
+
+      .product-icon {
+        height: 68px;
+        font-size: 33px;
       }
 
       .product-name {
         font-size: 12px;
       }
 
-      .product-art {
-        height: 68px;
+      /*
+        Na mobilu se panel přichytí dolů.
+      */
 
-        font-size: 34px;
-      }
+      .calculator {
+        top: auto;
+        bottom: 12px;
 
-      .result-panel {
-        padding:
-          15px
-          17px;
+        left: 12px;
+        right: 12px;
+
+        width: auto;
+
+        transform: none;
+
+        padding: 15px 17px;
 
         border-radius: 16px;
       }
 
-      .result-top-label {
+      .calculator-label {
         font-size: 9px;
       }
 
-      .result-top-title {
+      .calculator-title {
         font-size: 13px;
       }
 
-      .result-total {
+      .calculator-total-label {
+        display: none;
+      }
+
+      .calculator-total {
         font-size: 31px;
       }
 
-      .panel-buy-more-title {
+      .calculator-bonus {
+        margin-top: 8px;
+        font-size: 12px;
+      }
+
+      .buy-more-title {
         font-size: 16px;
       }
 
-      .panel-buy-more-text {
+      .buy-more-text {
         font-size: 11px;
       }
 
-      .panel-phone {
+      .phone {
         font-size: 19px;
       }
 
-      .panel-line {
-        margin:
-          12px
-          0;
-      }
-
-      .bottom-cta {
+      .calculator-info {
         display: none;
       }
 
@@ -860,14 +713,16 @@
 <body>
 
 
-  <div class="wrap">
+  <!-- =========================================
+       HLAVNÍ STRÁNKA
+       ========================================= -->
+
+  <main class="page">
 
 
-    <!-- =====================================
-         LOGO
-         ===================================== -->
+    <!-- LOGO -->
 
-    <header class="hero">
+    <div class="logo-wrap">
 
       <img
         class="logo"
@@ -875,12 +730,12 @@
         alt="POINTO LLC"
       >
 
-    </header>
+    </div>
 
 
-    <!-- =====================================
-         INFO KARTY
-         ===================================== -->
+    <!-- =======================================
+         INFO
+         ======================================= -->
 
     <section class="features">
 
@@ -956,500 +811,480 @@
     </section>
 
 
-    <!-- =====================================
+    <!-- =======================================
          PRODUKTY
-         ===================================== -->
+         ======================================= -->
 
-    <div class="section-title">
+    <section>
 
-      <h2>
-        Co vykupujeme
-      </h2>
+      <div class="section-title">
 
-    </div>
-
-
-    <main class="grid">
-
-
-      <!-- 1 -->
-
-      <div class="product">
-
-        <div class="product-art">
-          ◈
-        </div>
-
-        <div class="product-name">
-          Baterky na zbraň
-        </div>
-
-        <div class="qty">
-
-          <button
-            onclick="changeQty(0,-1)"
-          >
-            −
-          </button>
-
-          <input
-            id="q0"
-            type="number"
-            min="0"
-            value="0"
-          >
-
-          <button
-            onclick="changeQty(0,1)"
-          >
-            +
-          </button>
-
-        </div>
+        <h2>
+          Co vykupujeme
+        </h2>
 
       </div>
 
 
-      <!-- 2 -->
-
-      <div class="product">
-
-        <div class="product-art">
-          ◆
-        </div>
-
-        <div class="product-name">
-          Zlaté mince
-        </div>
-
-        <div class="qty">
-
-          <button
-            onclick="changeQty(1,-1)"
-          >
-            −
-          </button>
-
-          <input
-            id="q1"
-            type="number"
-            min="0"
-            value="0"
-          >
-
-          <button
-            onclick="changeQty(1,1)"
-          >
-            +
-          </button>
-
-        </div>
-
-      </div>
+      <div class="products">
 
 
-      <!-- 3 -->
+        <!-- 1 -->
 
-      <div class="product">
+        <div class="product">
 
-        <div class="product-art">
-          ▣
-        </div>
+          <div class="product-icon">
+            ◈
+          </div>
 
-        <div class="product-name">
-          Zvláštní karty
-        </div>
+          <div class="product-name">
+            Baterky na zbraň
+          </div>
 
-        <div class="qty">
+          <div class="quantity">
 
-          <button
-            onclick="changeQty(2,-1)"
-          >
-            −
-          </button>
+            <button
+              onclick="changeQty(0, -1)"
+            >
+              −
+            </button>
 
-          <input
-            id="q2"
-            type="number"
-            min="0"
-            value="0"
-          >
+            <input
+              id="q0"
+              type="number"
+              min="0"
+              value="0"
+            >
 
-          <button
-            onclick="changeQty(2,1)"
-          >
-            +
-          </button>
+            <button
+              onclick="changeQty(0, 1)"
+            >
+              +
+            </button>
+
+          </div>
 
         </div>
 
-      </div>
 
+        <!-- 2 -->
 
-      <!-- 4 -->
+        <div class="product">
 
-      <div class="product">
+          <div class="product-icon">
+            ◆
+          </div>
 
-        <div class="product-art">
-          ♢
-        </div>
+          <div class="product-name">
+            Zlaté mince
+          </div>
 
-        <div class="product-name">
-          Zlaté prsteny
-        </div>
+          <div class="quantity">
 
-        <div class="qty">
+            <button
+              onclick="changeQty(1, -1)"
+            >
+              −
+            </button>
 
-          <button
-            onclick="changeQty(3,-1)"
-          >
-            −
-          </button>
+            <input
+              id="q1"
+              type="number"
+              min="0"
+              value="0"
+            >
 
-          <input
-            id="q3"
-            type="number"
-            min="0"
-            value="0"
-          >
+            <button
+              onclick="changeQty(1, 1)"
+            >
+              +
+            </button>
 
-          <button
-            onclick="changeQty(3,1)"
-          >
-            +
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- 5 -->
-
-      <div class="product">
-
-        <div class="product-art">
-          ✦
-        </div>
-
-        <div class="product-name">
-          Náhrdelníky
-        </div>
-
-        <div class="qty">
-
-          <button
-            onclick="changeQty(4,-1)"
-          >
-            −
-          </button>
-
-          <input
-            id="q4"
-            type="number"
-            min="0"
-            value="0"
-          >
-
-          <button
-            onclick="changeQty(4,1)"
-          >
-            +
-          </button>
+          </div>
 
         </div>
 
-      </div>
 
+        <!-- 3 -->
 
-      <!-- 6 -->
+        <div class="product">
 
-      <div class="product">
+          <div class="product-icon">
+            ▣
+          </div>
 
-        <div class="product-art">
-          ⌚
-        </div>
+          <div class="product-name">
+            Zvláštní karty
+          </div>
 
-        <div class="product-name">
-          Hodinky
-        </div>
+          <div class="quantity">
 
-        <div class="qty">
+            <button
+              onclick="changeQty(2, -1)"
+            >
+              −
+            </button>
 
-          <button
-            onclick="changeQty(5,-1)"
-          >
-            −
-          </button>
+            <input
+              id="q2"
+              type="number"
+              min="0"
+              value="0"
+            >
 
-          <input
-            id="q5"
-            type="number"
-            min="0"
-            value="0"
-          >
+            <button
+              onclick="changeQty(2, 1)"
+            >
+              +
+            </button>
 
-          <button
-            onclick="changeQty(5,1)"
-          >
-            +
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- 7 -->
-
-      <div class="product">
-
-        <div class="product-art">
-          💎
-        </div>
-
-        <div class="product-name">
-          Klenoty
-        </div>
-
-        <div class="qty">
-
-          <button
-            onclick="changeQty(6,-1)"
-          >
-            −
-          </button>
-
-          <input
-            id="q6"
-            type="number"
-            min="0"
-            value="0"
-          >
-
-          <button
-            onclick="changeQty(6,1)"
-          >
-            +
-          </button>
+          </div>
 
         </div>
 
-      </div>
 
+        <!-- 4 -->
 
-      <!-- 8 -->
+        <div class="product">
 
-      <div class="product">
+          <div class="product-icon">
+            ♢
+          </div>
 
-        <div class="product-art">
-          ▰
-        </div>
+          <div class="product-name">
+            Zlaté prsteny
+          </div>
 
-        <div class="product-name">
-          Autodíly
-        </div>
+          <div class="quantity">
 
-        <div class="qty">
+            <button
+              onclick="changeQty(3, -1)"
+            >
+              −
+            </button>
 
-          <button
-            onclick="changeQty(7,-1)"
-          >
-            −
-          </button>
+            <input
+              id="q3"
+              type="number"
+              min="0"
+              value="0"
+            >
 
-          <input
-            id="q7"
-            type="number"
-            min="0"
-            value="0"
-          >
+            <button
+              onclick="changeQty(3, 1)"
+            >
+              +
+            </button>
 
-          <button
-            onclick="changeQty(7,1)"
-          >
-            +
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- 9 -->
-
-      <div class="product">
-
-        <div class="product-art">
-          ✺
-        </div>
-
-        <div class="product-name">
-          Semínka
-        </div>
-
-        <div class="qty">
-
-          <button
-            onclick="changeQty(8,-1)"
-          >
-            −
-          </button>
-
-          <input
-            id="q8"
-            type="number"
-            min="0"
-            value="0"
-          >
-
-          <button
-            onclick="changeQty(8,1)"
-          >
-            +
-          </button>
+          </div>
 
         </div>
 
-      </div>
 
+        <!-- 5 -->
 
-      <!-- 10 -->
+        <div class="product">
 
-      <div class="product">
+          <div class="product-icon">
+            ✦
+          </div>
 
-        <div class="product-art">
-          ⛳
-        </div>
+          <div class="product-name">
+            Náhrdelníky
+          </div>
 
-        <div class="product-name">
-          Golfová hůl
-        </div>
+          <div class="quantity">
 
-        <div class="qty">
+            <button
+              onclick="changeQty(4, -1)"
+            >
+              −
+            </button>
 
-          <button
-            onclick="changeQty(9,-1)"
-          >
-            −
-          </button>
+            <input
+              id="q4"
+              type="number"
+              min="0"
+              value="0"
+            >
 
-          <input
-            id="q9"
-            type="number"
-            min="0"
-            value="0"
-          >
+            <button
+              onclick="changeQty(4, 1)"
+            >
+              +
+            </button>
 
-          <button
-            onclick="changeQty(9,1)"
-          >
-            +
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- 11 -->
-
-      <div class="product">
-
-        <div class="product-art">
-          ⚙
-        </div>
-
-        <div class="product-name">
-          Sada na čištění zbraní
-        </div>
-
-        <div class="qty">
-
-          <button
-            onclick="changeQty(10,-1)"
-          >
-            −
-          </button>
-
-          <input
-            id="q10"
-            type="number"
-            min="0"
-            value="0"
-          >
-
-          <button
-            onclick="changeQty(10,1)"
-          >
-            +
-          </button>
+          </div>
 
         </div>
 
-      </div>
 
+        <!-- 6 -->
 
-      <!-- 12 -->
+        <div class="product">
 
-      <div class="product">
+          <div class="product-icon">
+            ⌚
+          </div>
 
-        <div class="product-art">
-          🎱
+          <div class="product-name">
+            Hodinky
+          </div>
+
+          <div class="quantity">
+
+            <button
+              onclick="changeQty(5, -1)"
+            >
+              −
+            </button>
+
+            <input
+              id="q5"
+              type="number"
+              min="0"
+              value="0"
+            >
+
+            <button
+              onclick="changeQty(5, 1)"
+            >
+              +
+            </button>
+
+          </div>
+
         </div>
 
-        <div class="product-name">
-          Kulečníkové tágo
+
+        <!-- 7 -->
+
+        <div class="product">
+
+          <div class="product-icon">
+            💎
+          </div>
+
+          <div class="product-name">
+            Klenoty
+          </div>
+
+          <div class="quantity">
+
+            <button
+              onclick="changeQty(6, -1)"
+            >
+              −
+            </button>
+
+            <input
+              id="q6"
+              type="number"
+              min="0"
+              value="0"
+            >
+
+            <button
+              onclick="changeQty(6, 1)"
+            >
+              +
+            </button>
+
+          </div>
+
         </div>
 
-        <div class="qty">
 
-          <button
-            onclick="changeQty(11,-1)"
-          >
-            −
-          </button>
+        <!-- 8 -->
 
-          <input
-            id="q11"
-            type="number"
-            min="0"
-            value="0"
-          >
+        <div class="product">
 
-          <button
-            onclick="changeQty(11,1)"
-          >
-            +
-          </button>
+          <div class="product-icon">
+            ▰
+          </div>
+
+          <div class="product-name">
+            Autodíly
+          </div>
+
+          <div class="quantity">
+
+            <button
+              onclick="changeQty(7, -1)"
+            >
+              −
+            </button>
+
+            <input
+              id="q7"
+              type="number"
+              min="0"
+              value="0"
+            >
+
+            <button
+              onclick="changeQty(7, 1)"
+            >
+              +
+            </button>
+
+          </div>
 
         </div>
 
-      </div>
+
+        <!-- 9 -->
+
+        <div class="product">
+
+          <div class="product-icon">
+            ✺
+          </div>
+
+          <div class="product-name">
+            Semínka
+          </div>
+
+          <div class="quantity">
+
+            <button
+              onclick="changeQty(8, -1)"
+            >
+              −
+            </button>
+
+            <input
+              id="q8"
+              type="number"
+              min="0"
+              value="0"
+            >
+
+            <button
+              onclick="changeQty(8, 1)"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
 
 
-    </main>
+        <!-- 10 -->
+
+        <div class="product">
+
+          <div class="product-icon">
+            ⛳
+          </div>
+
+          <div class="product-name">
+            Golfová hůl
+          </div>
+
+          <div class="quantity">
+
+            <button
+              onclick="changeQty(9, -1)"
+            >
+              −
+            </button>
+
+            <input
+              id="q9"
+              type="number"
+              min="0"
+              value="0"
+            >
+
+            <button
+              onclick="changeQty(9, 1)"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
 
 
+        <!-- 11 -->
 
-    <!-- =====================================
-         SPODNÍ CTA
-         NA PC SE ZOBRAZÍ, NA MOBILU NE
-         ===================================== -->
+        <div class="product">
 
-    <section class="bottom-cta">
+          <div class="product-icon">
+            ⚙
+          </div>
 
-      <h3>
-        VYKUPUJEME MNOHEM VÍCE!
-      </h3>
+          <div class="product-name">
+            Sada na čištění zbraní
+          </div>
 
-      <p>
-        Přineste, co nepotřebujete —
-        odnesete si hotovost.
-      </p>
+          <div class="quantity">
 
-      <div class="bottom-phone">
-        (520) 871-800
+            <button
+              onclick="changeQty(10, -1)"
+            >
+              −
+            </button>
+
+            <input
+              id="q10"
+              type="number"
+              min="0"
+              value="0"
+            >
+
+            <button
+              onclick="changeQty(10, 1)"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- 12 -->
+
+        <div class="product">
+
+          <div class="product-icon">
+            🎱
+          </div>
+
+          <div class="product-name">
+            Kulečníkové tágo
+          </div>
+
+          <div class="quantity">
+
+            <button
+              onclick="changeQty(11, -1)"
+            >
+              −
+            </button>
+
+            <input
+              id="q11"
+              type="number"
+              min="0"
+              value="0"
+            >
+
+            <button
+              onclick="changeQty(11, 1)"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+
       </div>
 
     </section>
@@ -1469,208 +1304,169 @@
 
     </footer>
 
-  </div>
+
+  </main>
 
 
+  <!-- =========================================
+       PEVNÝ KALKULAČNÍ PANEL
+       ========================================= -->
 
-  <!-- =======================================
-       FIXNÍ PRAVÝ PANEL
-       ======================================= -->
-
-  <aside class="result-panel">
+  <aside class="calculator">
 
 
-    <div class="result-top-label">
-
+    <div class="calculator-label">
       ORIENTAČNÍ VÝKUP
-
     </div>
 
 
-    <div class="result-top-title">
-
+    <div class="calculator-title">
       Zaklikněte věci pro
       orientační výkup
-
     </div>
 
 
-    <div class="result-total-label">
-
+    <div class="calculator-total-label">
       CELKEM
-
     </div>
 
 
     <div
       id="total"
-      class="result-total"
+      class="calculator-total"
     >
-
       $0
-
     </div>
 
 
     <div
       id="bonus"
-      class="bonus"
+      class="calculator-bonus"
     >
-
       Vyberte množství produktů
-
     </div>
 
 
-    <div class="panel-line"></div>
+    <div class="calculator-line"></div>
 
 
-    <div class="panel-buy-more">
-
-      <div class="panel-buy-more-title">
-
-        Vykupujeme
-        mnohem více!
-
-      </div>
-
-
-      <div class="panel-buy-more-text">
-
-        Přineste, co nepotřebujete,
-        odnesete si hotovost.
-
-      </div>
-
+    <div class="buy-more-title">
+      Vykupujeme mnohem více!
     </div>
 
 
-    <div class="panel-phone-label">
+    <div class="buy-more-text">
+      Přineste, co nepotřebujete,
+      odnesete si hotovost.
+    </div>
 
+
+    <div class="phone-label">
       Zavolejte nám
-
     </div>
 
 
-    <div class="panel-phone">
-
+    <div class="phone">
       (520) 871-800
-
     </div>
 
 
-    <div class="panel-info">
-
-      Výpočet se automaticky
-      přepočítává podle zadaného
-      množství.
-
+    <div class="calculator-info">
+      Výpočet se automaticky přepočítává
+      podle zadaného množství.
     </div>
 
 
   </aside>
 
 
-
   <script>
 
-
-    /* =====================================
-       VÝKUPNÍ CENY
-       ===================================== */
+    /*
+     * =========================================
+     * VÝKUPNÍ CENY
+     * =========================================
+     *
+     * Tyhle ceny nejsou zobrazené
+     * v jednotlivých produktech.
+     */
 
     const prices = [
 
-      250, // Baterky na zbraň
-      50,  // Zlaté mince
-      550, // Zvláštní karty
-      80,  // Zlaté prsteny
-      70,  // Náhrdelníky
-      75,  // Hodinky
-      60,  // Klenoty
-      10,  // Autodíly
-      45,  // Semínka
-      125, // Golfová hůl
-      50,  // Čisticí sada
-      120  // Kulečníkové tágo
+      250,  // Baterky na zbraň
+      50,   // Zlaté mince
+      550,  // Zvláštní karty
+      80,   // Zlaté prsteny
+      70,   // Náhrdelníky
+      75,   // Hodinky
+      60,   // Klenoty
+      10,   // Autodíly
+      45,   // Semínka
+      125,  // Golfová hůl
+      50,   // Sada na čištění zbraní
+      120   // Kulečníkové tágo
 
     ];
 
 
-    /* =====================================
-       BONUS
-       =====================================
+    /*
+     * =========================================
+     * BONUS
+     * =========================================
+     *
+     * 1 000+  = 5 %
+     * 2 500+  = 10 %
+     */
 
-       1 000+  = 5 %
-       2 500+  = 10 %
-
-    */
-
-
-    function bonusRate(total) {
+    function getBonusRate(total) {
 
       if (total >= 2500) {
-
         return 0.10;
-
       }
-
 
       if (total >= 1000) {
-
         return 0.05;
-
       }
 
-
       return 0;
-
     }
 
 
+    /*
+     * =========================================
+     * ZMĚNA MNOŽSTVÍ
+     * =========================================
+     */
 
-    /* =====================================
-       + / -
-       ===================================== */
-
-    function changeQty(index, change) {
-
+    function changeQty(index, amount) {
 
       const input =
         document.getElementById(
           "q" + index
         );
 
-
       let value =
         parseInt(input.value) || 0;
 
-
-      value += change;
-
+      value += amount;
 
       if (value < 0) {
-
         value = 0;
-
       }
-
 
       input.value = value;
 
-
-      calculate();
-
+      calculateTotal();
     }
 
 
+    /*
+     * =========================================
+     * HLAVNÍ VÝPOČET
+     * =========================================
+     */
 
-    /* =====================================
-       VÝPOČET
-       ===================================== */
-
-    function calculate() {
-
+    function calculateTotal() {
 
       let subtotal = 0;
 
@@ -1681,38 +1477,37 @@
         i++
       ) {
 
-
         const input =
           document.getElementById(
             "q" + i
           );
 
-
         const quantity =
           parseInt(input.value) || 0;
 
-
         subtotal +=
           quantity * prices[i];
-
       }
 
 
+      /*
+       * BONUS
+       */
 
-      const rate =
-        bonusRate(subtotal);
-
+      const bonusRate =
+        getBonusRate(subtotal);
 
       const bonus =
-        subtotal * rate;
+        subtotal * bonusRate;
 
+
+      /*
+       * CELKEM
+       */
 
       const total =
         subtotal + bonus;
 
-
-
-      /* CELKOVÁ ČÁSTKA */
 
       document
         .getElementById("total")
@@ -1726,8 +1521,9 @@
           );
 
 
-
-      /* BONUS */
+      /*
+       * TEXT BONUSU
+       */
 
       const bonusElement =
         document.getElementById(
@@ -1737,71 +1533,61 @@
 
       if (subtotal === 0) {
 
-
         bonusElement.textContent =
           "Vyberte množství produktů";
 
-
         return;
-
       }
 
 
-      if (rate > 0) {
-
+      if (bonusRate > 0) {
 
         bonusElement.textContent =
           "BONUS +" +
-          Math.round(
-            bonus
-          ).toLocaleString(
-            "en-US"
-          ) +
+          Math.round(bonus)
+            .toLocaleString("en-US") +
           " (" +
-          (rate * 100) +
+          (bonusRate * 100) +
           " %)";
 
-
         return;
-
       }
 
 
       bonusElement.textContent =
         "Při vyšší hodnotě můžete získat bonus.";
-
     }
 
 
-
-    /* =====================================
-       RUČNÍ ZADÁNÍ ČÍSLA
-       ===================================== */
+    /*
+     * =========================================
+     * RUČNÍ ZADÁNÍ MNOŽSTVÍ
+     * =========================================
+     */
 
     document
       .querySelectorAll(
-        ".qty input"
+        ".quantity input"
       )
       .forEach(
         input => {
 
-
           input.addEventListener(
             "input",
-            calculate
+            calculateTotal
           );
-
 
         }
       );
 
 
-    /* =====================================
-       PRVNÍ VÝPOČET
-       ===================================== */
+    /*
+     * =========================================
+     * PRVNÍ VÝPOČET
+     * =========================================
+     */
 
-    calculate();
-
+    calculateTotal();
 
   </script>
 
