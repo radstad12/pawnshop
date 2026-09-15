@@ -243,32 +243,54 @@
     }
 
     .product-photo{
+      width:100%;
       height:82px;
 
-      display:grid;
-      place-items:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
 
       border:1px solid #6c4c12;
       border-radius:10px;
 
       background:
         radial-gradient(
-          circle,
+          circle at center,
           #712099 0%,
           #271031 58%,
           #130818 100%
         );
 
       overflow:hidden;
+      padding:8px;
     }
 
     .product-photo img{
-      width:100%;
-      height:100%;
-
-      object-fit:contain;
       display:block;
+
+      width:auto !important;
+      height:auto !important;
+
+      max-width:90% !important;
+      max-height:90% !important;
+
+      min-width:0 !important;
+      min-height:0 !important;
+
+      object-fit:contain !important;
+      object-position:center center !important;
+
+      margin:auto;
     }
+    /* Bezpečnostní pojistka proti ořezu produktových obrázků */
+    .product-photo img,
+    .thumb img {
+      box-sizing:border-box;
+      object-fit:contain !important;
+      object-position:center center !important;
+      overflow:visible;
+    }
+
 
     .photo-fallback{
       color:#e7d5ff;
@@ -827,10 +849,21 @@
     }
 
     .thumb img{
-      width:100%;
-      height:100%;
+      display:block;
 
-      object-fit:cover;
+      width:auto !important;
+      height:auto !important;
+
+      max-width:88% !important;
+      max-height:88% !important;
+
+      min-width:0 !important;
+      min-height:0 !important;
+
+      object-fit:contain !important;
+      object-position:center center !important;
+
+      margin:auto;
     }
 
     .row-title{
@@ -3271,6 +3304,3 @@
   calculateTotal();
 
 </script>
-
-</body>
-</html>
