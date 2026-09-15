@@ -167,6 +167,180 @@
     }
 
     /* ===========================
+       KATEGORIE
+       =========================== */
+
+    .category-section {
+      width:100%;
+      margin-bottom:42px;
+    }
+
+    .category-section:last-child {
+      margin-bottom:0;
+    }
+
+    .category-heading {
+      display:flex;
+      align-items:center;
+      gap:12px;
+
+      margin:0 0 16px;
+      padding:0 2px 10px;
+
+      border-bottom:
+        1px solid
+        rgba(184,29,255,.25);
+    }
+
+    .category-icon {
+      width:42px;
+      height:42px;
+
+      flex:0 0 42px;
+
+      display:grid;
+      place-items:center;
+
+      border:
+        1px solid
+        rgba(184,29,255,.55);
+
+      border-radius:11px;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(184,29,255,.28),
+          rgba(35,8,47,.85)
+        );
+
+      box-shadow:
+        0 0 18px
+        rgba(184,29,255,.12);
+
+      font-size:21px;
+    }
+
+    .category-heading h3 {
+      margin:0;
+
+      color:var(--gold2);
+
+      font-family:Cinzel,serif;
+
+      font-size:24px;
+
+      line-height:1;
+
+      letter-spacing:.5px;
+
+      text-transform:uppercase;
+    }
+
+    .category-heading span {
+      margin-left:auto;
+
+      color:var(--muted);
+
+      font-size:11px;
+
+      font-weight:800;
+
+      letter-spacing:1px;
+
+      text-transform:uppercase;
+    }
+
+    .category-products {
+      width:100%;
+
+      display:grid;
+
+      grid-template-columns:
+        repeat(
+          6,
+          minmax(
+            175px,
+            1fr
+          )
+        );
+
+      gap:12px;
+    }
+
+    .category-empty{
+      padding:14px;
+      border:1px dashed #43204f;
+      border-radius:12px;
+      color:#8e7b98;
+      background:rgba(10,4,14,.35);
+      font-size:12px;
+    }
+
+    .category-admin{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .category-add-row{
+      display:grid;
+      grid-template-columns:1fr 72px auto;
+      gap:8px;
+      align-items:end;
+    }
+
+    .category-add-row .field{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+    }
+
+    .category-add-row .field label{
+      color:#dfd0e9;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .category-list{
+      display:grid;
+      gap:7px;
+      margin-top:12px;
+    }
+
+    .category-item{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:9px 10px;
+      border:1px solid #32183d;
+      border-radius:10px;
+      background:#0c0611;
+    }
+
+    .category-item-icon{
+      width:30px;
+      height:30px;
+      display:grid;
+      place-items:center;
+      border-radius:8px;
+      background:#1b0b25;
+      border:1px solid #4d205f;
+      flex:0 0 30px;
+    }
+
+    .category-item-name{
+      flex:1;
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .category-count{
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    /* ===========================
        PRODUKTY
        =========================== */
 
@@ -1027,6 +1201,14 @@
             minmax(175px,1fr)
           );
       }
+
+      .category-products{
+        grid-template-columns:
+          repeat(
+            5,
+            minmax(175px,1fr)
+          );
+      }
     }
 
     @media(max-width:1150px){
@@ -1042,6 +1224,14 @@
             minmax(175px,1fr)
           );
       }
+
+      .category-products{
+        grid-template-columns:
+          repeat(
+            4,
+            minmax(175px,1fr)
+          );
+      }
     }
 
     @media(max-width:900px){
@@ -1051,6 +1241,14 @@
       }
 
       .products{
+        grid-template-columns:
+          repeat(
+            3,
+            minmax(175px,1fr)
+          );
+      }
+
+      .category-products{
         grid-template-columns:
           repeat(
             3,
@@ -1116,6 +1314,36 @@
           );
 
         gap:8px;
+      }
+
+      .category-products{
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(150px,1fr)
+          );
+
+        gap:8px;
+      }
+
+      .category-heading{
+        align-items:center;
+      }
+
+      .category-heading span{
+        margin-left:auto;
+      }
+
+      .category-heading h3{
+        font-size:20px;
+      }
+
+      .category-add-row{
+        grid-template-columns:1fr 60px;
+      }
+
+      .category-add-row button{
+        grid-column:1/-1;
       }
 
       .product{
@@ -1535,6 +1763,17 @@
           </div>
 
 
+          <div class="field">
+
+            <label>
+              Kategorie
+            </label>
+
+            <select id="pCategory"></select>
+
+          </div>
+
+
           <div class="field full">
 
             <label>
@@ -1608,6 +1847,61 @@
       <!-- BONUSY -->
 
       <section class="panel">
+
+        <h3>
+          Kategorie
+        </h3>
+
+        <div class="category-admin">
+
+          <div class="category-add-row">
+
+            <div class="field">
+
+              <label>
+                Název nové kategorie
+              </label>
+
+              <input
+                id="newCategoryName"
+                placeholder="Např. Elektronika"
+              >
+
+            </div>
+
+            <div class="field">
+
+              <label>
+                Ikona
+              </label>
+
+              <input
+                id="newCategoryIcon"
+                maxlength="4"
+                value="📦"
+              >
+
+            </div>
+
+            <button
+              class="primary"
+              onclick="addCategory()"
+            >
+              Přidat
+            </button>
+
+          </div>
+
+          <div
+            id="categoryList"
+            class="category-list"
+          ></div>
+
+        </div>
+
+
+        <div style="height:1px;background:#32183d;margin:22px 0;"></div>
+
 
         <h3>
           Bonusové úrovně
@@ -1772,6 +2066,54 @@
   const SESSION_KEY =
     "pointo_admin_session_v2";
 
+  const CATEGORIES_KEY =
+    "pointo_categories_v1";
+
+
+  /* ========================================
+     VÝCHOZÍ KATEGORIE
+     ======================================== */
+
+  const defaultCategories = [
+
+    {
+      id:"cennosti",
+      name:"Cennosti",
+      icon:"💎"
+    },
+
+    {
+      id:"zbrane",
+      name:"Zbraně",
+      icon:"🔫"
+    },
+
+    {
+      id:"zahradnictvi",
+      name:"Zahradnictví",
+      icon:"🌿"
+    },
+
+    {
+      id:"chemikalie",
+      name:"Chemikálie",
+      icon:"⚗️"
+    },
+
+    {
+      id:"naradi",
+      name:"Nářadí",
+      icon:"🛠️"
+    },
+
+    {
+      id:"karty",
+      name:"Karty",
+      icon:"🃏"
+    }
+
+  ];
+
 
   /* ========================================
      VÝCHOZÍ PRODUKTY
@@ -1784,6 +2126,7 @@
       name:"Baterky na zbraň",
       price:250,
       image:"",
+      category:"zbrane",
       active:true
     },
 
@@ -1792,6 +2135,7 @@
       name:"Zlaté mince",
       price:50,
       image:"",
+      category:"cennosti",
       active:true
     },
 
@@ -1800,6 +2144,7 @@
       name:"Zvláštní karty",
       price:550,
       image:"",
+      category:"karty",
       active:true
     },
 
@@ -1808,6 +2153,7 @@
       name:"Zlaté prsteny",
       price:80,
       image:"",
+      category:"cennosti",
       active:true
     },
 
@@ -1816,6 +2162,7 @@
       name:"Náhrdelníky",
       price:70,
       image:"",
+      category:"cennosti",
       active:true
     },
 
@@ -1824,6 +2171,7 @@
       name:"Hodinky",
       price:75,
       image:"",
+      category:"cennosti",
       active:true
     },
 
@@ -1832,6 +2180,7 @@
       name:"Klenoty",
       price:60,
       image:"",
+      category:"cennosti",
       active:true
     },
 
@@ -1840,6 +2189,7 @@
       name:"Autodíly",
       price:10,
       image:"",
+      category:"naradi",
       active:true
     },
 
@@ -1848,6 +2198,7 @@
       name:"Semínka",
       price:45,
       image:"",
+      category:"zahradnictvi",
       active:true
     },
 
@@ -1856,6 +2207,7 @@
       name:"Golfová hůl",
       price:125,
       image:"",
+      category:"naradi",
       active:true
     },
 
@@ -1864,6 +2216,7 @@
       name:"Sada na čištění zbraní",
       price:50,
       image:"",
+      category:"zbrane",
       active:true
     },
 
@@ -1872,6 +2225,7 @@
       name:"Kulečníkové tágo",
       price:120,
       image:"",
+      category:"naradi",
       active:true
     }
 
@@ -1939,6 +2293,77 @@
   }
 
 
+  let categories =
+    loadJson(
+      CATEGORIES_KEY,
+      null
+    );
+
+
+  if(!categories){
+
+    categories =
+      defaultCategories;
+
+    saveJson(
+      CATEGORIES_KEY,
+      categories
+    );
+
+  }
+
+
+  function normalizeProductCategory(product){
+
+    if(product.category){
+
+      const exists =
+        categories.some(
+          c => c.id === product.category
+        );
+
+      if(exists){
+
+        return product;
+
+      }
+
+    }
+
+
+    const legacyMap = {
+
+      "Baterky na zbraň":"zbrane",
+      "Sada na čištění zbraní":"zbrane",
+
+      "Zlaté mince":"cennosti",
+      "Zlaté prsteny":"cennosti",
+      "Náhrdelníky":"cennosti",
+      "Hodinky":"cennosti",
+      "Klenoty":"cennosti",
+
+      "Zvláštní karty":"karty",
+
+      "Semínka":"zahradnictvi",
+
+      "Autodíly":"naradi",
+      "Golfová hůl":"naradi",
+      "Kulečníkové tágo":"naradi"
+
+    };
+
+
+    return {
+      ...product,
+      category:
+        legacyMap[product.name]
+        || categories[0]?.id
+        || ""
+    };
+
+  }
+
+
   let products =
     loadJson(
       PRODUCTS_KEY,
@@ -1957,6 +2382,18 @@
     );
 
   }
+
+
+  products =
+    products.map(
+      normalizeProductCategory
+    );
+
+
+  saveJson(
+    PRODUCTS_KEY,
+    products
+  );
 
 
   let bonuses =
@@ -2078,6 +2515,10 @@
 
   function openAdmin(){
 
+    renderCategorySelect();
+
+    renderCategoryList();
+
     renderAdminProducts();
 
     renderBonusRows();
@@ -2159,6 +2600,21 @@
         "pImage"
       )
       .value = "";
+
+
+    renderCategorySelect();
+
+
+    if(categories.length){
+
+      document
+        .getElementById(
+          "pCategory"
+        )
+        .value =
+          categories[0].id;
+
+    }
 
 
     document
@@ -2256,6 +2712,14 @@
         .checked;
 
 
+    const category =
+      document
+        .getElementById(
+          "pCategory"
+        )
+        .value;
+
+
     const file =
       document
         .getElementById(
@@ -2312,6 +2776,9 @@
         item.price =
           price;
 
+        item.category =
+          category;
+
         item.active =
           active;
 
@@ -2345,6 +2812,9 @@
         image:
           image,
 
+        category:
+          category,
+
         active:
           active
 
@@ -2364,6 +2834,8 @@
     renderProducts();
 
     renderAdminProducts();
+
+    renderCategoryList();
 
   }
 
@@ -2408,6 +2880,19 @@
       )
       .value =
         item.price;
+
+
+    renderCategorySelect();
+
+
+    document
+      .getElementById(
+        "pCategory"
+      )
+      .value =
+        item.category
+        || categories[0]?.id
+        || "";
 
 
     document
@@ -2482,6 +2967,8 @@
 
       renderAdminProducts();
 
+      renderCategoryList();
+
       resetProductForm();
 
     }
@@ -2547,6 +3034,11 @@
                 </div>
 
                 <div class="row-meta">
+
+                  Kategorie:
+                  ${escapeHtml(getCategoryName(p.category))}
+
+                  ·
 
                   Výkup:
                   $${Number(p.price).toLocaleString("cs-CZ")}
@@ -2617,6 +3109,7 @@
       box.innerHTML =
         '<div class="status">Momentálně nejsou aktivní žádné produkty.</div>';
 
+
       document
         .getElementById(
           "total"
@@ -2638,81 +3131,302 @@
     }
 
 
-    box.innerHTML =
-      active
-        .map(
-          p => `
-
-            <div class="product">
-
-
-              <div class="product-photo">
-
-                ${
-                  p.image
-
-                  ?
-
-                  `
-                  <img
-                    src="${p.image}"
-                    alt="${escapeHtml(p.name)}"
-                  >
-                  `
-
-                  :
-
-                  `
-                  <div class="photo-fallback">
-                    FOTOGRAFIE PRODUKTU
-                  </div>
-                  `
-                }
-
-              </div>
-
-
-              <div class="product-name">
-
-                ${escapeHtml(p.name)}
-
-              </div>
-
-
-              <div class="quantity">
-
-                <button
-                  type="button"
-                  onclick="changeQty('${p.id}',-1)"
-                >
-                  −
-                </button>
-
-
-                <input
-                  id="q_${p.id}"
-                  type="number"
-                  min="0"
-                  value="0"
-                  oninput="calculateTotal()"
-                >
-
-
-                <button
-                  type="button"
-                  onclick="changeQty('${p.id}',1)"
-                >
-                  +
-                </button>
-
-              </div>
-
-
-            </div>
-
-          `
+    const categoryMap =
+      new Map(
+        categories.map(
+          category =>
+            [category.id, category]
         )
-        .join("");
+      );
+
+
+    const grouped =
+      categories
+        .map(
+          category => ({
+
+            ...category,
+
+            items:
+              active.filter(
+                product =>
+                  product.category ===
+                  category.id
+              )
+
+          })
+        )
+        .filter(
+          group =>
+            group.items.length > 0
+        );
+
+
+    const uncategorized =
+      active.filter(
+        product =>
+          !categoryMap.has(
+            product.category
+          )
+      );
+
+
+    box.innerHTML = "";
+
+
+    grouped.forEach(
+      group => {
+
+        const section =
+          document.createElement(
+            "section"
+          );
+
+        section.className =
+          "category-section";
+
+
+        const heading =
+          document.createElement(
+            "div"
+          );
+
+        heading.className =
+          "category-heading";
+
+
+        const icon =
+          document.createElement(
+            "div"
+          );
+
+        icon.className =
+          "category-icon";
+
+        icon.textContent =
+          group.icon ||
+          "📦";
+
+
+        const title =
+          document.createElement(
+            "h3"
+          );
+
+        title.textContent =
+          group.name;
+
+
+        const count =
+          document.createElement(
+            "span"
+          );
+
+        count.textContent =
+          `${group.items.length} ${
+            group.items.length === 1
+              ? "produkt"
+              : "produktů"
+          }`;
+
+
+        heading.appendChild(
+          icon
+        );
+
+        heading.appendChild(
+          title
+        );
+
+        heading.appendChild(
+          count
+        );
+
+
+        const productGrid =
+          document.createElement(
+            "div"
+          );
+
+        productGrid.className =
+          "category-products";
+
+
+        group.items.forEach(
+          p => {
+
+            productGrid.insertAdjacentHTML(
+              "beforeend",
+              productCardHtml(p)
+            );
+
+          }
+        );
+
+
+        section.appendChild(
+          heading
+        );
+
+        section.appendChild(
+          productGrid
+        );
+
+
+        box.appendChild(
+          section
+        );
+
+      }
+    );
+
+
+    if(
+      uncategorized.length
+    ){
+
+      const section =
+        document.createElement(
+          "section"
+        );
+
+        section.className =
+          "category-section";
+
+
+      const heading =
+        document.createElement(
+          "div"
+        );
+
+        heading.className =
+          "category-heading";
+
+
+      heading.innerHTML =
+        `
+          <div class="category-icon">
+            📦
+          </div>
+
+          <h3>
+            Bez kategorie
+          </h3>
+
+          <span>
+            ${uncategorized.length} produktů
+          </span>
+        `;
+
+
+      const productGrid =
+        document.createElement(
+          "div"
+        );
+
+      productGrid.className =
+        "category-products";
+
+
+      uncategorized.forEach(
+        p => {
+
+          productGrid.insertAdjacentHTML(
+            "beforeend",
+            productCardHtml(p)
+          );
+
+        }
+      );
+
+
+      section.appendChild(
+        heading
+      );
+
+      section.appendChild(
+        productGrid
+      );
+
+
+      box.appendChild(
+        section
+      );
+
+    }
+
+
+    calculateTotal();
+
+  }
+
+
+  function productCardHtml(p){
+
+    return `
+
+      <div class="product">
+
+        <div class="product-photo">
+
+          ${
+            p.image
+            ?
+              `
+                <img
+                  src="${p.image}"
+                  alt="${escapeHtml(p.name)}"
+                >
+              `
+            :
+              `
+                <div class="photo-fallback">
+                  FOTOGRAFIE PRODUKTU
+                </div>
+              `
+          }
+
+        </div>
+
+
+        <div class="product-name">
+
+          ${escapeHtml(p.name)}
+
+        </div>
+
+
+        <div class="quantity">
+
+          <button
+            type="button"
+            onclick="changeQty('${p.id}',-1)"
+          >
+            −
+          </button>
+
+
+          <input
+            id="q_${p.id}"
+            type="number"
+            min="0"
+            value="0"
+            oninput="calculateTotal()"
+          >
+
+
+          <button
+            type="button"
+            onclick="changeQty('${p.id}',1)"
+          >
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
 
   }
 
@@ -2797,6 +3511,270 @@
 
   }
 
+
+  /* ========================================
+     KATEGORIE
+     ======================================== */
+
+  function getCategory(
+    id
+  ){
+
+    return categories.find(
+      category =>
+        category.id === id
+    );
+
+  }
+
+
+  function getCategoryName(
+    id
+  ){
+
+    return (
+      getCategory(id)?.name
+      || "Bez kategorie"
+    );
+
+  }
+
+
+  function renderCategorySelect(){
+
+    const select =
+      document.getElementById(
+        "pCategory"
+      );
+
+
+    if(!select){
+      return;
+    }
+
+
+    const previous =
+      select.value;
+
+
+    select.innerHTML =
+      categories
+        .map(
+          category => `
+            <option
+              value="${category.id}"
+            >
+              ${escapeHtml(category.icon || "📦")}
+              ${escapeHtml(category.name)}
+            </option>
+          `
+        )
+        .join("");
+
+
+    if(
+      categories.some(
+        category =>
+          category.id === previous
+      )
+    ){
+
+      select.value =
+        previous;
+
+    }
+
+  }
+
+
+  function renderCategoryList(){
+
+    const list =
+      document.getElementById(
+        "categoryList"
+      );
+
+
+    if(!list){
+      return;
+    }
+
+
+    list.innerHTML =
+      categories
+        .map(
+          category => {
+
+            const count =
+              products.filter(
+                product =>
+                  product.category ===
+                  category.id
+              ).length;
+
+
+            return `
+              <div class="category-item">
+
+                <div class="category-item-icon">
+                  ${escapeHtml(category.icon || "📦")}
+                </div>
+
+                <div class="category-item-name">
+                  ${escapeHtml(category.name)}
+                </div>
+
+                <div class="category-count">
+                  ${count} produktů
+                </div>
+
+              </div>
+            `;
+
+          }
+        )
+        .join("");
+
+  }
+
+
+  function addCategory(){
+
+    const nameInput =
+      document.getElementById(
+        "newCategoryName"
+      );
+
+
+    const iconInput =
+      document.getElementById(
+        "newCategoryIcon"
+      );
+
+
+    const name =
+      nameInput
+        .value
+        .trim();
+
+
+    const icon =
+      iconInput
+        .value
+        .trim()
+        || "📦";
+
+
+    if(!name){
+
+      alert(
+        "Zadej název kategorie."
+      );
+
+      return;
+
+    }
+
+
+    const exists =
+      categories.some(
+        category =>
+          category.name
+            .toLowerCase()
+            ===
+          name.toLowerCase()
+      );
+
+
+    if(exists){
+
+      alert(
+        "Tato kategorie už existuje."
+      );
+
+      return;
+
+    }
+
+
+    const baseId =
+      slugify(name);
+
+
+    let id =
+      baseId
+      ||
+      `category-${Date.now()}`;
+
+
+    while(
+      categories.some(
+        category =>
+          category.id === id
+      )
+    ){
+
+      id =
+        `${baseId}-${Date.now()}`;
+
+    }
+
+
+    categories.push({
+
+      id,
+      name,
+      icon
+
+    });
+
+
+    saveJson(
+      CATEGORIES_KEY,
+      categories
+    );
+
+
+    nameInput.value =
+      "";
+
+    iconInput.value =
+      "📦";
+
+
+    renderCategorySelect();
+
+    renderCategoryList();
+
+  }
+
+
+  function slugify(
+    value
+  ){
+
+    return value
+
+      .normalize("NFD")
+
+      .replace(
+        /[\u0300-\u036f]/g,
+        ""
+      )
+
+      .toLowerCase()
+
+      .replace(
+        /[^a-z0-9]+/g,
+        "-"
+      )
+
+      .replace(
+        /^-+|-+$/g,
+        ""
+      );
+
+  }
 
   /* ========================================
      BONUS
@@ -3152,7 +4130,9 @@
 
       products,
 
-      bonuses
+      bonuses,
+
+      categories
 
     };
 
@@ -3270,6 +4250,41 @@
           }
 
 
+          if(
+            Array.isArray(
+              data.categories
+            )
+          ){
+
+            categories =
+              data.categories;
+
+
+            saveJson(
+              CATEGORIES_KEY,
+              categories
+            );
+
+          }
+
+
+          products =
+            products.map(
+              normalizeProductCategory
+            );
+
+
+          saveJson(
+            PRODUCTS_KEY,
+            products
+          );
+
+
+          renderCategorySelect();
+
+          renderCategoryList();
+
+
           renderProducts();
 
           calculateTotal();
@@ -3372,6 +4387,10 @@
   /* ========================================
      START
      ======================================== */
+
+  renderCategorySelect();
+
+  renderCategoryList();
 
   renderProducts();
 
