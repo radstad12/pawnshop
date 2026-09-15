@@ -3271,16 +3271,23 @@
           "category-products";
 
 
-        group.items.forEach(
-          p => {
+        group.items
+          .slice()
+          .sort(
+            (a, b) =>
+              Number(a.price || 0) -
+              Number(b.price || 0)
+          )
+          .forEach(
+            p => {
 
-            productGrid.insertAdjacentHTML(
-              "beforeend",
-              productCardHtml(p)
-            );
+              productGrid.insertAdjacentHTML(
+                "beforeend",
+                productCardHtml(p)
+              );
 
-          }
-        );
+            }
+          );
 
 
         section.appendChild(
@@ -3347,16 +3354,23 @@
         "category-products";
 
 
-      uncategorized.forEach(
-        p => {
+      uncategorized
+        .slice()
+        .sort(
+          (a, b) =>
+            Number(a.price || 0) -
+            Number(b.price || 0)
+        )
+        .forEach(
+          p => {
 
-          productGrid.insertAdjacentHTML(
-            "beforeend",
-            productCardHtml(p)
-          );
+            productGrid.insertAdjacentHTML(
+              "beforeend",
+              productCardHtml(p)
+            );
 
-        }
-      );
+          }
+        );
 
 
       section.appendChild(
