@@ -390,6 +390,37 @@
       backdrop-filter:blur(14px);
     }
 
+    .reset-calculator {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 9px 14px;
+      border: 1px solid #5b2c6c;
+      border-radius: 10px;
+      background: rgba(21, 7, 28, 0.88);
+      color: #f5eaff;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition:
+        border-color .15s ease,
+        background .15s ease,
+        box-shadow .15s ease,
+        transform .15s ease;
+    }
+
+    .reset-calculator:hover {
+      border-color: var(--purple);
+      background: #220b2d;
+      box-shadow: 0 0 16px rgba(184, 29, 255, .18);
+      transform: translateY(-1px);
+    }
+
+    .reset-calculator:active {
+      transform: translateY(0);
+    }
+
     .calculator-label{
       color:var(--gold2);
 
@@ -1267,6 +1298,16 @@
      ========================================= -->
 
 <aside class="calculator">
+
+    <button
+      type="button"
+      class="reset-calculator"
+      onclick="resetCalculator()"
+    >
+      Vynulovat
+    </button>
+
+
 
   <div class="calculator-label">
     ORIENTAČNÍ VÝKUP
@@ -2720,6 +2761,39 @@
 
 
     calculateTotal();
+
+  }
+
+
+  /* ========================================
+     VYNULOVAT VÝKUP
+     ======================================== */
+
+  function resetCalculator(){
+
+    products
+      .filter(p => p.active)
+      .forEach(p => {
+
+        const input =
+          document.getElementById(
+            "q_" + p.id
+          );
+
+        if(input){
+          input.value = 0;
+        }
+
+      });
+
+    document
+      .getElementById("total")
+      .textContent = "$0";
+
+    document
+      .getElementById("bonus")
+      .textContent =
+        "Vyberte množství produktů";
 
   }
 
