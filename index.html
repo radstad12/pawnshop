@@ -170,8 +170,20 @@
        KATEGORIE
        =========================== */
 
+    /* =====================================================
+       KATEGORIE LISTING
+       Každá kategorie je samostatný blok pod předchozí.
+       ===================================================== */
+
+    .category-listing {
+      width: 100%;
+      display: block !important;
+    }
+
     .category-section {
       width:100%;
+      display:block !important;
+      clear:both;
       margin-bottom:42px;
     }
 
@@ -364,6 +376,13 @@
         repeat(6,minmax(175px,1fr));
 
       gap:12px;
+    }
+
+    /* Starý .products layout už nepoužíváme pro
+       kontejner kategorií. */
+    #products.category-listing {
+      display:block !important;
+      width:100%;
     }
 
     .product{
@@ -1498,7 +1517,7 @@
 
     <div
       id="products"
-      class="products"
+      class="category-listing"
     ></div>
 
   </section>
