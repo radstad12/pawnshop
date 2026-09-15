@@ -614,6 +614,81 @@
       transform: translateY(0);
     }
 
+    .admin-logout-top{
+      position:fixed;
+      top:16px;
+      right:16px;
+      z-index:10060;
+      border:1px solid #db4f67;
+      background:rgba(28,5,12,.92);
+      color:#ffdce2;
+      padding:9px 13px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:900;
+      letter-spacing:1px;
+      box-shadow:0 0 18px rgba(219,79,103,.14);
+    }
+    .admin-logout-top:hover{
+      background:#3a0d18;
+      box-shadow:0 0 20px rgba(219,79,103,.22);
+    }
+    .admin-only{display:none;}
+    body.admin-mode .admin-only{display:block;}
+    .admin-calculator-title{
+      margin-top:5px;
+      color:#fff;
+      font-size:17px;
+      line-height:1.35;
+      font-weight:900;
+    }
+    .admin-stat{
+      margin-top:15px;
+      padding:12px 13px;
+      border:1px solid #3b1d49;
+      border-radius:11px;
+      background:rgba(10,4,14,.55);
+    }
+    .admin-stat-label{
+      color:var(--muted);
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:1.4px;
+      text-transform:uppercase;
+    }
+    .admin-stat-value{
+      margin-top:4px;
+      color:var(--gold2);
+      font-size:24px;
+      line-height:1.1;
+      font-weight:1000;
+    }
+    .admin-stat.profit{
+      border-color:rgba(52,211,123,.32);
+      background:linear-gradient(145deg,rgba(10,50,29,.35),rgba(4,20,12,.45));
+    }
+    .admin-stat.profit .admin-stat-label{color:#8ef0b4;}
+    .admin-stat.profit .admin-stat-value{
+      color:#55f18b;
+      text-shadow:0 0 16px rgba(85,241,139,.18);
+    }
+    .admin-item-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      margin-left:7px;
+      padding:3px 6px;
+      border:1px solid rgba(184,29,255,.35);
+      border-radius:6px;
+      background:rgba(94,24,120,.2);
+      color:#e0adff;
+      font-size:8px;
+      line-height:1;
+      font-weight:900;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+      vertical-align:middle;
+    }
     .calculator-label{
       color:var(--gold2);
 
@@ -1431,6 +1506,15 @@
   ADMIN
 </button>
 
+<button
+  id="adminLogoutTop"
+  class="admin-logout-top"
+  onclick="logout()"
+  style="display:none;"
+>
+  ODHLÁSIT
+</button>
+
 
 <main class="page">
 
@@ -1580,6 +1664,56 @@
     class="calculator-bonus"
   >
     Vyberte množství produktů
+  </div>
+
+
+  <div
+    id="adminCalculator"
+    class="admin-only"
+  >
+
+    <div class="calculator-line"></div>
+
+    <div class="admin-calculator-title">
+      Interní přehled
+    </div>
+
+    <div class="admin-stat">
+      <div class="admin-stat-label">
+        Výkupní cena zákazníkovi
+      </div>
+      <div
+        id="adminBuyTotal"
+        class="admin-stat-value"
+      >
+        $0
+      </div>
+    </div>
+
+    <div class="admin-stat">
+      <div class="admin-stat-label">
+        Celková prodejní cena
+      </div>
+      <div
+        id="adminSaleTotal"
+        class="admin-stat-value"
+      >
+        $0
+      </div>
+    </div>
+
+    <div class="admin-stat profit">
+      <div class="admin-stat-label">
+        Čistý zisk
+      </div>
+      <div
+        id="adminProfit"
+        class="admin-stat-value"
+      >
+        $0
+      </div>
+    </div>
+
   </div>
 
   <div class="calculator-line"></div>
@@ -1785,6 +1919,23 @@
           <div class="field">
 
             <label>
+              Prodejní cena
+            </label>
+
+            <input
+              id="pSalePrice"
+              type="number"
+              min="0"
+              step="1"
+              placeholder="Cena za kterou to prodáš dál"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
               Kategorie
             </label>
 
@@ -1819,6 +1970,21 @@
               >
 
               Produkt je veřejně dostupný
+
+            </label>
+
+          </div>
+
+          <div class="field full">
+
+            <label class="checkline">
+
+              <input
+                id="pAdminItem"
+                type="checkbox"
+              >
+
+              Admin item — běžný zákazník ho neuvidí
 
             </label>
 
@@ -2083,7 +2249,7 @@
     "pointo_bonus_v2";
 
   const SESSION_KEY =
-    "pointo_admin_session_v2";
+    "pointo_admin_session_v3";
 
   const CATEGORIES_KEY =
     "pointo_categories_v1";
@@ -2144,8 +2310,10 @@
       id: crypto.randomUUID(),
       name:"Baterky na zbraň",
       price:250,
+      sale_price:0,
       image:"",
       category:"zbrane",
+      admin_item:false,
       active:true
     },
 
@@ -2153,8 +2321,10 @@
       id: crypto.randomUUID(),
       name:"Zlaté mince",
       price:50,
+      sale_price:0,
       image:"",
       category:"cennosti",
+      admin_item:false,
       active:true
     },
 
@@ -2162,8 +2332,10 @@
       id: crypto.randomUUID(),
       name:"Zvláštní karty",
       price:550,
+      sale_price:0,
       image:"",
       category:"karty",
+      admin_item:false,
       active:true
     },
 
@@ -2171,8 +2343,10 @@
       id: crypto.randomUUID(),
       name:"Zlaté prsteny",
       price:80,
+      sale_price:0,
       image:"",
       category:"cennosti",
+      admin_item:false,
       active:true
     },
 
@@ -2180,8 +2354,10 @@
       id: crypto.randomUUID(),
       name:"Náhrdelníky",
       price:70,
+      sale_price:0,
       image:"",
       category:"cennosti",
+      admin_item:false,
       active:true
     },
 
@@ -2189,8 +2365,10 @@
       id: crypto.randomUUID(),
       name:"Hodinky",
       price:75,
+      sale_price:0,
       image:"",
       category:"cennosti",
+      admin_item:false,
       active:true
     },
 
@@ -2198,8 +2376,10 @@
       id: crypto.randomUUID(),
       name:"Klenoty",
       price:60,
+      sale_price:0,
       image:"",
       category:"cennosti",
+      admin_item:false,
       active:true
     },
 
@@ -2207,8 +2387,10 @@
       id: crypto.randomUUID(),
       name:"Autodíly",
       price:10,
+      sale_price:0,
       image:"",
       category:"naradi",
+      admin_item:false,
       active:true
     },
 
@@ -2216,8 +2398,10 @@
       id: crypto.randomUUID(),
       name:"Semínka",
       price:45,
+      sale_price:0,
       image:"",
       category:"zahradnictvi",
+      admin_item:false,
       active:true
     },
 
@@ -2225,8 +2409,10 @@
       id: crypto.randomUUID(),
       name:"Golfová hůl",
       price:125,
+      sale_price:0,
       image:"",
       category:"naradi",
+      admin_item:false,
       active:true
     },
 
@@ -2234,8 +2420,10 @@
       id: crypto.randomUUID(),
       name:"Sada na čištění zbraní",
       price:50,
+      sale_price:0,
       image:"",
       category:"zbrane",
+      admin_item:false,
       active:true
     },
 
@@ -2243,8 +2431,10 @@
       id: crypto.randomUUID(),
       name:"Kulečníkové tágo",
       price:120,
+      sale_price:0,
       image:"",
       category:"naradi",
+      admin_item:false,
       active:true
     }
 
@@ -2404,9 +2594,17 @@
 
 
   products =
-    products.map(
-      normalizeProductCategory
-    );
+    products
+      .map(
+        normalizeProductCategory
+      )
+      .map(
+        product => ({
+          ...product,
+          sale_price:Number(product.sale_price ?? 0),
+          admin_item:Boolean(product.admin_item)
+        })
+      );
 
 
   saveJson(
@@ -2507,13 +2705,17 @@
       pass === ADMIN_PASS
     ){
 
-      sessionStorage.setItem(
+      localStorage.setItem(
         SESSION_KEY,
         "1"
       );
 
-      closeLogin();
+      document.body.classList.add("admin-mode");
+      updateAdminTopbar();
+      renderProducts();
+      calculateTotal();
 
+      closeLogin();
       openAdmin();
 
     }else{
@@ -2570,11 +2772,21 @@
 
   function logout(){
 
-    sessionStorage.removeItem(
+    localStorage.removeItem(
       SESSION_KEY
     );
 
+    document.body.classList.remove(
+      "admin-mode"
+    );
+
+    updateAdminTopbar();
+
     closeAdmin();
+
+    renderProducts();
+
+    resetCalculator();
 
   }
 
@@ -2582,10 +2794,29 @@
   function isAdmin(){
 
     return(
-      sessionStorage.getItem(
+      localStorage.getItem(
         SESSION_KEY
       ) === "1"
     );
+
+  }
+
+
+  function updateAdminTopbar(){
+
+    const button =
+      document.getElementById(
+        "adminLogoutTop"
+      );
+
+    if(button){
+
+      button.style.display =
+        isAdmin()
+          ? "block"
+          : "none";
+
+    }
 
   }
 
@@ -2610,6 +2841,13 @@
     document
       .getElementById(
         "pPrice"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "pSalePrice"
       )
       .value = "";
 
@@ -2641,6 +2879,13 @@
         "pActive"
       )
       .checked = true;
+
+
+    document
+      .getElementById(
+        "pAdminItem"
+      )
+      .checked = false;
 
 
     document
@@ -2731,6 +2976,24 @@
         .checked;
 
 
+    const salePrice =
+      Number(
+        document
+          .getElementById(
+            "pSalePrice"
+          )
+          .value
+      );
+
+
+    const adminItem =
+      document
+        .getElementById(
+          "pAdminItem"
+        )
+        .checked;
+
+
     const category =
       document
         .getElementById(
@@ -2750,7 +3013,9 @@
     if(
       !name ||
       !Number.isFinite(price) ||
-      price < 0
+      price < 0 ||
+      !Number.isFinite(salePrice) ||
+      salePrice < 0
     ){
 
       alert(
@@ -2795,11 +3060,17 @@
         item.price =
           price;
 
+        item.sale_price =
+          salePrice;
+
         item.category =
           category;
 
         item.active =
           active;
+
+        item.admin_item =
+          adminItem;
 
 
         if(image){
@@ -2828,6 +3099,9 @@
         price:
           price,
 
+        sale_price:
+          salePrice,
+
         image:
           image,
 
@@ -2835,7 +3109,10 @@
           category,
 
         active:
-          active
+          active,
+
+        admin_item:
+          adminItem
 
       });
 
@@ -2901,6 +3178,14 @@
         item.price;
 
 
+    document
+      .getElementById(
+        "pSalePrice"
+      )
+      .value =
+        item.sale_price ?? 0;
+
+
     renderCategorySelect();
 
 
@@ -2928,6 +3213,16 @@
       )
       .checked =
         item.active;
+
+
+    document
+      .getElementById(
+        "pAdminItem"
+      )
+      .checked =
+        Boolean(
+          item.admin_item
+        );
 
 
     document
@@ -3050,6 +3345,11 @@
 
                 <div class="row-title">
                   ${escapeHtml(p.name)}
+                  ${
+                    p.admin_item
+                    ? '<span class="admin-item-badge">🔒 ADMIN ITEM</span>'
+                    : ''
+                  }
                 </div>
 
                 <div class="row-meta">
@@ -3061,6 +3361,11 @@
 
                   Výkup:
                   $${Number(p.price).toLocaleString("cs-CZ")}
+
+                  ·
+
+                  Prodej:
+                  $${Number(p.sale_price ?? 0).toLocaleString("cs-CZ")}
 
                   ·
 
@@ -3117,7 +3422,11 @@
     const active =
       products.filter(
         p =>
-          p.active
+          p.active &&
+          (
+            isAdmin() ||
+            !p.admin_item
+          )
       );
 
 
@@ -3542,6 +3851,8 @@
       .textContent =
         "Vyberte množství produktů";
 
+    calculateTotal();
+
   }
 
 
@@ -3847,14 +4158,18 @@
 
   function calculateTotal(){
 
-    let subtotal =
-      0;
+    let subtotal = 0;
+    let saleTotal = 0;
 
 
     products
       .filter(
         p =>
-          p.active
+          p.active &&
+          (
+            isAdmin() ||
+            !p.admin_item
+          )
       )
       .forEach(
         p => {
@@ -3867,19 +4182,28 @@
 
           if(input){
 
+            const quantity =
+              parseInt(
+                input.value
+              ) || 0;
+
+
             subtotal +=
-
-              (
-                parseInt(
-                  input.value
-                ) || 0
-              )
-
-              *
-
+              quantity *
               Number(
-                p.price
+                p.price || 0
               );
+
+
+            if(isAdmin()){
+
+              saleTotal +=
+                quantity *
+                Number(
+                  p.sale_price || 0
+                );
+
+            }
 
           }
 
@@ -3894,13 +4218,15 @@
 
 
     const bonus =
-      subtotal *
-      rate;
+      subtotal * rate;
 
 
-    const total =
-      subtotal +
-      bonus;
+    const customerPayout =
+      subtotal + bonus;
+
+
+    const profit =
+      saleTotal - customerPayout;
 
 
     document
@@ -3908,10 +4234,8 @@
         "total"
       )
       .textContent =
-
         "$" +
-
-        total.toLocaleString(
+        customerPayout.toLocaleString(
           "en-US",
           {
             maximumFractionDigits:0
@@ -3925,37 +4249,26 @@
       );
 
 
-    if(
-      subtotal === 0
-    ){
+    if(subtotal === 0){
 
       bonusEl.textContent =
         "Vyberte množství produktů";
 
     }
-
-    else if(
-      rate > 0
-    ){
+    else if(rate > 0){
 
       bonusEl.textContent =
-
         "BONUS +" +
-
         Math.round(
           bonus
         ).toLocaleString(
           "en-US"
         ) +
-
         " (" +
-
         (rate * 100) +
-
         " %)";
 
     }
-
     else{
 
       bonusEl.textContent =
@@ -3963,7 +4276,78 @@
 
     }
 
+
+    const buyEl =
+      document.getElementById(
+        "adminBuyTotal"
+      );
+
+    const saleEl =
+      document.getElementById(
+        "adminSaleTotal"
+      );
+
+    const profitEl =
+      document.getElementById(
+        "adminProfit"
+      );
+
+
+    if(isAdmin()){
+
+      if(buyEl){
+
+        buyEl.textContent =
+          "$" +
+          customerPayout.toLocaleString(
+            "en-US",
+            {
+              maximumFractionDigits:0
+            }
+          );
+
+      }
+
+
+      if(saleEl){
+
+        saleEl.textContent =
+          "$" +
+          saleTotal.toLocaleString(
+            "en-US",
+            {
+              maximumFractionDigits:0
+            }
+          );
+
+      }
+
+
+      if(profitEl){
+
+        profitEl.textContent =
+          "$" +
+          profit.toLocaleString(
+            "en-US",
+            {
+              maximumFractionDigits:0
+            }
+          );
+
+      }
+
+    }
+    else{
+
+      if(buyEl) buyEl.textContent = "$0";
+      if(saleEl) saleEl.textContent = "$0";
+      if(profitEl) profitEl.textContent = "$0";
+
+    }
+
   }
+
+
 
 
   /* ========================================
@@ -4302,9 +4686,17 @@
 
 
           products =
-            products.map(
-              normalizeProductCategory
-            );
+            products
+              .map(
+                normalizeProductCategory
+              )
+              .map(
+                product => ({
+                  ...product,
+                  sale_price:Number(product.sale_price ?? 0),
+                  admin_item:Boolean(product.admin_item)
+                })
+              );
 
 
           saveJson(
@@ -4425,8 +4817,27 @@
 
   renderCategoryList();
 
+
+  if(isAdmin()){
+
+    document.body.classList.add(
+      "admin-mode"
+    );
+
+  }
+
+
+  updateAdminTopbar();
+
   renderProducts();
 
   calculateTotal();
+
+
+  if(isAdmin()){
+
+    openAdmin();
+
+  }
 
 </script>
